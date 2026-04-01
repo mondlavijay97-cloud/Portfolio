@@ -15,8 +15,8 @@ const OpportunitySection = () => (
       </h2>
       <div className="grid gap-4 sm:grid-cols-2">
         {items.map(({ icon: Icon, text }) => (
-          <div key={text} className="flex items-center gap-3 rounded-xl border border-border/50 bg-card p-5 text-left">
-            <Icon size={20} className="shrink-0 text-accent icon-glow" />
+          <div key={text} className="flex items-center gap-3 rounded-xl glass-card glass-card-hover p-5 text-left">
+            <Icon size={20} className="shrink-0 text-primary-highlight icon-glow" />
             <span>{text}</span>
           </div>
         ))}

@@ -11,18 +11,19 @@ const modules = [
 ];
 
 const ModulesSection = () => (
-  <section id="modules" className="py-20">
-    <div className="container space-y-12">
+  <section id="modules" className="py-20 relative overflow-hidden">
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/10 blur-[200px] pointer-events-none" />
+    <div className="container space-y-12 relative">
       <h2 className="text-3xl font-bold text-center sm:text-4xl">
         What You'll <span className="text-gradient">Learn</span>
       </h2>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {modules.map(({ icon: Icon, title, bullets }, i) => (
+        {modules.map(({ icon: Icon, title, bullets }) => (
           <div
             key={title}
-            className="group rounded-2xl border border-border/50 bg-card p-6 space-y-4 transition-all hover:border-primary/40 hover:glow-purple"
+            className="group rounded-2xl glass-card glass-card-hover p-6 space-y-4 bg-gradient-card transition-all duration-300"
           >
-            <Icon size={28} className="text-primary icon-glow" />
+            <Icon size={28} className="text-primary-highlight icon-glow" />
             <h3 className="text-lg font-bold">{title}</h3>
             <ul className="space-y-1 text-sm text-muted-foreground">
               {bullets.map((b) => (
