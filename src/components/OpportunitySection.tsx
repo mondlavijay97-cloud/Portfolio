@@ -1,31 +1,51 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { TrendingUp, Briefcase, UserCheck, DollarSign } from "lucide-react";
 
-const blocks = [
-  { icon: UserCheck, text: "Build personal brand", x: "-55%", y: "-60%" },
-  { icon: Briefcase, text: "Get freelance clients", x: "55%", y: "-45%" },
-  { icon: TrendingUp, text: "Land better jobs", x: "-50%", y: "50%" },
-  { icon: DollarSign, text: "Create income streams", x: "52%", y: "65%" },
+const outcomes = [
+  { icon: UserCheck, text: "Build personal brand" },
+  { icon: Briefcase, text: "Get freelance clients" },
+  { icon: TrendingUp, text: "Land better jobs" },
+  { icon: DollarSign, text: "Create income streams" },
 ];
 
 const words = ["Skill", "Leverage", "Opportunity"];
+
+/* Animated dots that travel along the connector line */
+const FlowDots = () => (
+  <div className="absolute inset-0 overflow-hidden">
+    {[0, 1, 2].map((i) => (
+      <motion.div
+        key={i}
+        className="absolute top-1/2 -translate-y-1/2 w-2 h-2 rounded-full"
+        style={{ background: "hsl(var(--primary))", boxShadow: "0 0 8px hsl(var(--primary) / 0.6)" }}
+        animate={{ left: ["-4%", "104%"] }}
+        transition={{
+          duration: 2.5,
+          repeat: Infinity,
+          delay: i * 0.8,
+          ease: "linear",
+        }}
+      />
+    ))}
+  </div>
+);
 
 const OpportunitySection = () => {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
     <section className="relative py-28 overflow-hidden" style={{ background: "hsl(var(--background))" }}>
-      {/* Subtle radial glow */}
+      {/* Radial glow */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, hsl(var(--primary) / 0.08) 0%, transparent 70%)" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
+        style={{ background: "radial-gradient(ellipse, hsl(var(--primary) / 0.06) 0%, transparent 70%)" }}
       />
 
-      <div className="container max-w-4xl relative z-10">
+      <div className="container max-w-6xl relative z-10">
         {/* Heading */}
         <motion.div
-          className="text-center mb-24"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -37,51 +57,77 @@ const OpportunitySection = () => {
           </h2>
         </motion.div>
 
-        {/* Constellation layout */}
-        <div className="relative flex items-center justify-center" style={{ minHeight: "380px" }}>
-          {/* Center pill */}
+        {/* Horizontal flow: CONTENT → line → 2x2 grid */}
+        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-0">
+          {/* LEFT — Core pill */}
           <motion.div
-            className="relative z-10 px-8 py-4 rounded-full font-heading text-lg font-bold tracking-wider text-primary-foreground"
-            style={{
-              background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-bright)))",
-              boxShadow: "0 0 30px hsl(var(--primary) / 0.3)",
-            }}
-            animate={{ y: [0, -6, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="shrink-0"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
           >
-            CONTENT
+            <div
+              className="px-10 py-6 rounded-2xl font-heading text-xl font-bold tracking-wider text-primary-foreground"
+              style={{
+                background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-bright)))",
+                boxShadow: "0 0 40px hsl(var(--primary) / 0.25)",
+              }}
+            >
+              CONTENT
+            </div>
           </motion.div>
 
-          {/* Floating blocks */}
-          {blocks.map(({ icon: Icon, text, x, y }, i) => {
-            const isHovered = hovered === i;
-            return (
-              <motion.div
-                key={text}
-                className="absolute cursor-pointer"
-                style={{ left: "50%", top: "50%" }}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.15 * i }}
-                animate={{
-                  x, y,
-                  translateY: isHovered ? "-8px" : "0px",
-                  scale: isHovered ? 1.05 : 1,
-                }}
-                onMouseEnter={() => setHovered(i)}
-                onMouseLeave={() => setHovered(null)}
-              >
+          {/* CENTER — Connector line (hidden on mobile) */}
+          <motion.div
+            className="hidden lg:block relative flex-1 mx-4"
+            style={{ height: 2 }}
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <div
+              className="w-full h-full origin-left"
+              style={{
+                background: "linear-gradient(90deg, hsl(var(--primary) / 0.6), hsl(var(--primary) / 0.15))",
+              }}
+            />
+            <FlowDots />
+          </motion.div>
+
+          {/* Mobile connector (vertical) */}
+          <motion.div
+            className="lg:hidden relative w-0.5 h-12"
+            style={{ background: "linear-gradient(180deg, hsl(var(--primary) / 0.6), hsl(var(--primary) / 0.1))" }}
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          />
+
+          {/* RIGHT — 2x2 outcome grid */}
+          <div className="grid grid-cols-2 gap-4 shrink-0">
+            {outcomes.map(({ icon: Icon, text }, i) => {
+              const isHovered = hovered === i;
+              return (
                 <motion.div
-                  animate={{ y: [0, -5, 0] }}
-                  transition={{ duration: 3.5 + i * 0.4, repeat: Infinity, ease: "easeInOut" }}
+                  key={text}
+                  className="cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.4 + i * 0.1 }}
+                  whileHover={{ y: -4, scale: 1.04 }}
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
                 >
                   <div
-                    className="flex items-center gap-3 rounded-xl px-5 py-4 whitespace-nowrap transition-shadow duration-300"
+                    className="flex items-center gap-3 rounded-xl px-5 py-4 transition-shadow duration-300"
                     style={{
                       background: "hsl(var(--surface))",
                       boxShadow: isHovered
-                        ? "0 8px 30px hsl(var(--primary) / 0.15), 0 2px 8px hsl(0 0% 0% / 0.3)"
+                        ? "0 8px 30px hsl(var(--primary) / 0.12), 0 2px 10px hsl(0 0% 0% / 0.3)"
                         : "0 2px 8px hsl(0 0% 0% / 0.2)",
                     }}
                   >
@@ -91,12 +137,12 @@ const OpportunitySection = () => {
                     >
                       <Icon size={18} className="text-primary" />
                     </div>
-                    <span className="text-sm font-medium text-foreground">{text}</span>
+                    <span className="text-sm font-medium text-foreground whitespace-nowrap">{text}</span>
                   </div>
                 </motion.div>
-              </motion.div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
 
         {/* Final statement */}
