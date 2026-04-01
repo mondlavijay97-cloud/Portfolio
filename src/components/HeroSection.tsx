@@ -12,8 +12,9 @@ const HeroSection = () => (
       {/* Copy */}
       <div className="space-y-6 animate-fade-up">
         <h1 className="text-5xl font-bold leading-tight tracking-tight sm:text-6xl lg:text-6xl">
-          Learn Content Creation That{" "}
-          <span className="text-gradient">Actually Gets You Results</span>
+          Learn Content Creation
+          <br />That Actually Gets You
+          <br /><span className="text-gradient">Results</span>
         </h1>
         <p className="text-lg text-muted-foreground max-w-lg">
           From zero → to creating, growing & monetizing content using AI
@@ -34,7 +35,7 @@ const HeroSection = () => (
       {/* Video placeholder */}
       <div className="relative group animate-fade-up flex justify-center" style={{ animationDelay: "0.15s" }}>
         <div className="rounded-2xl overflow-hidden border border-primary/20 glass-card max-w-[340px] w-full">
-          <img src={heroImage} alt="Creator workspace" width={1024} height={768} className="w-full object-cover aspect-[9/16]" />
+          <img src={heroImage} alt="Creator workspace" width={1024} height={768} className="w-full object-cover aspect-[3/4]" />
           <div className="absolute inset-0 flex items-center justify-center bg-background/40 rounded-2xl transition-colors group-hover:bg-background/20">
             <div className="flex items-center gap-3 rounded-full bg-gradient-cta px-5 py-2.5 glow-purple">
               <Play size={18} className="fill-foreground text-foreground" />
