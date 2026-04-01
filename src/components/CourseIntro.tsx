@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { ShinyButtonLink } from "@/components/ui/shiny-button";
 import { Sparkles, Zap, Target } from "lucide-react";
 
 const CourseIntro = () => (
@@ -20,9 +20,7 @@ const CourseIntro = () => (
           </div>
         ))}
       </div>
-      <Button variant="gradient" size="lg" asChild>
-        <a href="#modules">View Curriculum</a>
-      </Button>
+      <ShinyButtonLink href="#modules">View Curriculum</ShinyButtonLink>
     </div>
   </section>
 );
