@@ -71,53 +71,79 @@ const ModuleCard = ({
   );
 };
 
-const CenterAvatar = () => (
-  <div className="relative flex items-center justify-center" style={{ width: 200, height: 200 }}>
-    {[120, 160, 200].map((size, i) => (
-      <motion.div
-        key={size}
-        className="absolute rounded-full border pointer-events-none"
-        style={{
-          width: size,
-          height: size,
-          borderColor: `hsla(var(--primary), ${0.12 - i * 0.03})`,
-        }}
-        animate={{ scale: [1, 1.04, 1], opacity: [0.6, 1, 0.6] }}
-        transition={{ duration: 3 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
-      />
-    ))}
+/* Premium 3-layer center hub */
+const CenterHub = () => (
+  <div className="relative flex items-center justify-center" style={{ width: 220, height: 220 }}>
+    {/* Outer glow ring */}
     <motion.div
-      className="relative z-10 w-20 h-20 rounded-full flex items-center justify-center"
+      className="absolute rounded-full pointer-events-none"
       style={{
-        background: "radial-gradient(circle, hsla(var(--primary), 0.25) 0%, hsla(var(--primary), 0.08) 70%)",
-        border: "2px solid hsla(var(--primary), 0.4)",
-        boxShadow: "0 0 40px hsla(var(--primary), 0.3), inset 0 0 20px hsla(var(--primary), 0.1)",
+        width: 220,
+        height: 220,
+        background: "radial-gradient(circle, hsla(var(--primary), 0.15) 0%, transparent 70%)",
+      }}
+      animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.8, 0.5] }}
+      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+    />
+
+    {/* Middle ring */}
+    <motion.div
+      className="absolute rounded-full pointer-events-none"
+      style={{
+        width: 140,
+        height: 140,
+        border: "1.5px solid hsla(var(--primary), 0.3)",
+      }}
+      animate={{ scale: [1, 1.03, 1], opacity: [0.6, 1, 0.6] }}
+      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+    />
+
+    {/* Outer decorative ring */}
+    <motion.div
+      className="absolute rounded-full pointer-events-none"
+      style={{
+        width: 180,
+        height: 180,
+        border: "1px solid hsla(var(--primary), 0.12)",
+      }}
+      animate={{ scale: [1, 1.04, 1], opacity: [0.4, 0.7, 0.4] }}
+      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+    />
+
+    {/* Inner core */}
+    <motion.div
+      className="relative z-10 w-24 h-24 rounded-full flex items-center justify-center"
+      style={{
+        backgroundColor: "hsl(var(--card))",
+        border: "2px solid hsla(var(--primary), 0.5)",
+        boxShadow: "0 0 50px hsla(var(--primary), 0.3), 0 0 100px hsla(var(--primary), 0.15), inset 0 0 30px hsla(var(--primary), 0.1)",
       }}
       animate={{
+        scale: [1, 1.05, 1],
         boxShadow: [
-          "0 0 40px hsla(var(--primary), 0.3)",
-          "0 0 60px hsla(var(--primary), 0.5)",
-          "0 0 40px hsla(var(--primary), 0.3)",
+          "0 0 50px hsla(var(--primary), 0.3), 0 0 100px hsla(var(--primary), 0.15), inset 0 0 30px hsla(var(--primary), 0.1)",
+          "0 0 70px hsla(var(--primary), 0.5), 0 0 120px hsla(var(--primary), 0.25), inset 0 0 40px hsla(var(--primary), 0.15)",
+          "0 0 50px hsla(var(--primary), 0.3), 0 0 100px hsla(var(--primary), 0.15), inset 0 0 30px hsla(var(--primary), 0.1)",
         ],
       }}
       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
     >
-      <User size={32} className="text-primary" />
+      <User size={36} className="text-primary" />
     </motion.div>
   </div>
 );
 
-/* Dynamic SVG connection lines */
-const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => {
-  // Grid layout: left cards at x~27%, right cards at x~73%, center at 50%
-  // 4 rows evenly spaced within the container
-  const rows = [0, 1, 2, 3];
+/* Orthogonal SVG connection lines: center → H → V → H → card */
+const OrthogonalLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => {
   const totalRows = 4;
-  const padY = 8; // percent padding top/bottom
+  const padY = 8;
   const centerX = 50;
   const centerY = 50;
-  const leftCardX = 30; // right edge of left cards (percentage)
-  const rightCardX = 70; // left edge of right cards
+  const leftCardX = 31;
+  const rightCardX = 69;
+  // Horizontal bus distance from center
+  const leftBusX = 40;
+  const rightBusX = 60;
 
   return (
     <svg
@@ -128,46 +154,132 @@ const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => {
     >
       <defs>
         <filter id="lineGlow">
-          <feGaussianBlur stdDeviation="0.5" result="blur" />
+          <feGaussianBlur stdDeviation="0.4" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        <filter id="lineGlowStrong">
+          <feGaussianBlur stdDeviation="0.8" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
       </defs>
-      {rows.map((i) => {
+      {[0, 1, 2, 3].map((i) => {
         const rowY = padY + ((100 - padY * 2) / (totalRows - 1)) * i;
         const isLeftHovered = hoveredIndex === i;
         const isRightHovered = hoveredIndex === i + 4;
+
+        // Left path: center → H to leftBusX → V to rowY → H to leftCardX
+        const leftPath = `M ${centerX} ${centerY} H ${leftBusX} V ${rowY} H ${leftCardX}`;
+        // Right path: center → H to rightBusX → V to rowY → H to rightCardX
+        const rightPath = `M ${centerX} ${centerY} H ${rightBusX} V ${rowY} H ${rightCardX}`;
+
         return (
           <g key={i}>
-            {/* Left line */}
-            <motion.line
-              x1={leftCardX} y1={rowY} x2={centerX} y2={centerY}
+            {/* Left orthogonal line */}
+            <motion.path
+              d={leftPath}
               stroke="hsl(var(--primary))"
-              strokeWidth={isLeftHovered ? "0.4" : "0.2"}
-              opacity={isLeftHovered ? 0.8 : 0.3}
-              filter="url(#lineGlow)"
+              strokeWidth={isLeftHovered ? "0.5" : "0.2"}
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              opacity={isLeftHovered ? 0.9 : 0.3}
+              filter={isLeftHovered ? "url(#lineGlowStrong)" : "url(#lineGlow)"}
               initial={{ pathLength: 0, opacity: 0 }}
-              whileInView={{ pathLength: 1, opacity: isLeftHovered ? 0.8 : 0.3 }}
+              whileInView={{ pathLength: 1, opacity: isLeftHovered ? 0.9 : 0.3 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 + i * 0.1 }}
+              transition={{ duration: 1, delay: 0.3 + i * 0.12 }}
             />
-            {/* Right line */}
-            <motion.line
-              x1={centerX} y1={centerY} x2={rightCardX} y2={rowY}
-              stroke="hsl(var(--primary))"
-              strokeWidth={isRightHovered ? "0.4" : "0.2"}
-              opacity={isRightHovered ? 0.8 : 0.3}
-              filter="url(#lineGlow)"
-              initial={{ pathLength: 0, opacity: 0 }}
-              whileInView={{ pathLength: 1, opacity: isRightHovered ? 0.8 : 0.3 }}
+            {/* Left glow duplicate for hovered state */}
+            {isLeftHovered && (
+              <motion.path
+                d={leftPath}
+                stroke="hsl(var(--primary))"
+                strokeWidth="1.2"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                opacity={0.15}
+                filter="url(#lineGlowStrong)"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 0.4 }}
+              />
+            )}
+
+            {/* Small dot at card junction */}
+            <motion.circle
+              cx={leftCardX}
+              cy={rowY}
+              r={isLeftHovered ? "0.6" : "0.35"}
+              fill="hsl(var(--primary))"
+              opacity={isLeftHovered ? 1 : 0.5}
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 + i * 0.1 }}
+              transition={{ duration: 0.3, delay: 0.8 + i * 0.12 }}
+            />
+
+            {/* Right orthogonal line */}
+            <motion.path
+              d={rightPath}
+              stroke="hsl(var(--primary))"
+              strokeWidth={isRightHovered ? "0.5" : "0.2"}
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              opacity={isRightHovered ? 0.9 : 0.3}
+              filter={isRightHovered ? "url(#lineGlowStrong)" : "url(#lineGlow)"}
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: isRightHovered ? 0.9 : 0.3 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.3 + i * 0.12 }}
+            />
+            {isRightHovered && (
+              <motion.path
+                d={rightPath}
+                stroke="hsl(var(--primary))"
+                strokeWidth="1.2"
+                strokeLinejoin="round"
+                strokeLinecap="round"
+                opacity={0.15}
+                filter="url(#lineGlowStrong)"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 0.4 }}
+              />
+            )}
+
+            {/* Small dot at card junction */}
+            <motion.circle
+              cx={rightCardX}
+              cy={rowY}
+              r={isRightHovered ? "0.6" : "0.35"}
+              fill="hsl(var(--primary))"
+              opacity={isRightHovered ? 1 : 0.5}
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: 0.8 + i * 0.12 }}
             />
           </g>
         );
       })}
+
+      {/* Center dot */}
+      <motion.circle
+        cx={centerX}
+        cy={centerY}
+        r="0.8"
+        fill="hsl(var(--primary))"
+        opacity={0.8}
+        initial={{ scale: 0 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: 0.2 }}
+      />
     </svg>
   );
 };
@@ -211,9 +323,9 @@ const ModulesSection = () => {
           </motion.h2>
         </div>
 
-        {/* Radial layout — desktop: CSS Grid for perfect symmetry */}
+        {/* Radial layout — desktop */}
         <div className="relative hidden lg:grid" style={{ gridTemplateColumns: "1fr auto 1fr", minHeight: 560 }}>
-          <ConnectionLines hoveredIndex={hoveredIndex} />
+          <OrthogonalLines hoveredIndex={hoveredIndex} />
 
           {/* Left cards */}
           <div className="flex flex-col justify-between py-2 pr-8 z-10">
@@ -230,7 +342,7 @@ const ModulesSection = () => {
 
           {/* Center */}
           <div className="flex items-center justify-center z-10">
-            <CenterAvatar />
+            <CenterHub />
           </div>
 
           {/* Right cards */}
@@ -250,7 +362,7 @@ const ModulesSection = () => {
         {/* Mobile / tablet layout */}
         <div className="lg:hidden space-y-8">
           <div className="flex justify-center">
-            <CenterAvatar />
+            <CenterHub />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {[...leftModules, ...rightModules].map((m, i) => (
