@@ -4,71 +4,41 @@ import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 const leftModules = [
-  {
-    icon: BookOpen,
-    title: "Content Foundations",
-    bullets: ["Creator mindset", "Platform understanding"],
-  },
-  {
-    icon: PenTool,
-    title: "Content Strategy",
-    bullets: ["Niche selection", "Positioning"],
-  },
-  {
-    icon: FileText,
-    title: "Script Writing",
-    bullets: ["Hooks & retention", "CTA placement"],
-  },
-  {
-    icon: MessageSquare,
-    title: "Storytelling",
-    bullets: ["Narrative arcs", "Emotional triggers"],
-  },
+  { icon: BookOpen, title: "Content Foundations", bullets: ["Creator mindset", "Platform understanding"] },
+  { icon: PenTool, title: "Content Strategy", bullets: ["Niche selection", "Positioning"] },
+  { icon: FileText, title: "Script Writing", bullets: ["Hooks & retention", "CTA placement"] },
+  { icon: MessageSquare, title: "Storytelling", bullets: ["Narrative arcs", "Emotional triggers"] },
 ];
 
 const rightModules = [
-  {
-    icon: Film,
-    title: "Editing System",
-    bullets: ["Efficient workflows", "Tool stack"],
-  },
-  {
-    icon: Bot,
-    title: "AI Content Creation",
-    bullets: ["Prompt engineering", "Automation"],
-  },
-  {
-    icon: TrendingUp,
-    title: "Growth Systems",
-    bullets: ["Instagram & YouTube growth", "Algorithm understanding"],
-  },
-  {
-    icon: Coins,
-    title: "Monetization",
-    bullets: ["Freelancing", "Brand deals & income streams"],
-  },
+  { icon: Film, title: "Editing System", bullets: ["Efficient workflows", "Tool stack"] },
+  { icon: Bot, title: "AI Content Creation", bullets: ["Prompt engineering", "Automation"] },
+  { icon: TrendingUp, title: "Growth Systems", bullets: ["Instagram & YouTube growth", "Algorithm understanding"] },
+  { icon: Coins, title: "Monetization", bullets: ["Freelancing", "Brand deals & income streams"] },
 ];
 
 const ModuleCard = ({
   module,
   index,
   side,
+  onHover,
 }: {
   module: (typeof leftModules)[0];
   index: number;
   side: "left" | "right";
+  onHover?: (hovered: boolean) => void;
 }) => {
   const Icon = module.icon;
   const [hovered, setHovered] = useState(false);
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: side === "left" ? -40 : 40 }}
+      initial={{ opacity: 0, x: side === "left" ? -30 : 30 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      transition={{ duration: 0.5, delay: 0.15 + index * 0.1 }}
+      onMouseEnter={() => { setHovered(true); onHover?.(true); }}
+      onMouseLeave={() => { setHovered(false); onHover?.(false); }}
       className="group relative"
     >
       <motion.div
@@ -76,16 +46,16 @@ const ModuleCard = ({
         transition={{ duration: 0.25 }}
         className="relative flex items-start gap-4 rounded-xl p-4 border transition-all duration-300"
         style={{
-          backgroundColor: "#181825",
-          borderColor: hovered ? "rgba(124,58,237,0.4)" : "rgba(124,58,237,0.15)",
-          boxShadow: hovered ? "0 0 20px rgba(124,58,237,0.15)" : "none",
+          backgroundColor: "hsl(var(--card))",
+          borderColor: hovered ? "hsla(var(--primary), 0.4)" : "hsla(var(--primary), 0.15)",
+          boxShadow: hovered ? "0 0 24px hsla(var(--primary), 0.2)" : "none",
         }}
       >
         <div
           className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300"
           style={{
-            backgroundColor: hovered ? "rgba(124,58,237,0.2)" : "rgba(124,58,237,0.1)",
-            border: `1px solid ${hovered ? "rgba(168,85,247,0.4)" : "rgba(124,58,237,0.2)"}`,
+            backgroundColor: hovered ? "hsla(var(--primary), 0.2)" : "hsla(var(--primary), 0.1)",
+            border: `1px solid ${hovered ? "hsla(var(--primary), 0.4)" : "hsla(var(--primary), 0.2)"}`,
           }}
         >
           <Icon size={18} className="text-primary transition-transform duration-300 group-hover:scale-110" />
@@ -102,8 +72,7 @@ const ModuleCard = ({
 };
 
 const CenterAvatar = () => (
-  <div className="relative flex items-center justify-center">
-    {/* Outer rings */}
+  <div className="relative flex items-center justify-center" style={{ width: 200, height: 200 }}>
     {[120, 160, 200].map((size, i) => (
       <motion.div
         key={size}
@@ -111,22 +80,26 @@ const CenterAvatar = () => (
         style={{
           width: size,
           height: size,
-          borderColor: `rgba(124,58,237,${0.12 - i * 0.03})`,
+          borderColor: `hsla(var(--primary), ${0.12 - i * 0.03})`,
         }}
         animate={{ scale: [1, 1.04, 1], opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 3 + i, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
       />
     ))}
-
-    {/* Core circle */}
     <motion.div
       className="relative z-10 w-20 h-20 rounded-full flex items-center justify-center"
       style={{
-        background: "radial-gradient(circle, rgba(124,58,237,0.25) 0%, rgba(124,58,237,0.08) 70%)",
-        border: "2px solid rgba(124,58,237,0.4)",
-        boxShadow: "0 0 40px rgba(124,58,237,0.3), inset 0 0 20px rgba(124,58,237,0.1)",
+        background: "radial-gradient(circle, hsla(var(--primary), 0.25) 0%, hsla(var(--primary), 0.08) 70%)",
+        border: "2px solid hsla(var(--primary), 0.4)",
+        boxShadow: "0 0 40px hsla(var(--primary), 0.3), inset 0 0 20px hsla(var(--primary), 0.1)",
       }}
-      animate={{ boxShadow: ["0 0 40px rgba(124,58,237,0.3)", "0 0 60px rgba(124,58,237,0.5)", "0 0 40px rgba(124,58,237,0.3)"] }}
+      animate={{
+        boxShadow: [
+          "0 0 40px hsla(var(--primary), 0.3)",
+          "0 0 60px hsla(var(--primary), 0.5)",
+          "0 0 40px hsla(var(--primary), 0.3)",
+        ],
+      }}
       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
     >
       <User size={32} className="text-primary" />
@@ -134,62 +107,75 @@ const CenterAvatar = () => (
   </div>
 );
 
-/* SVG connection lines for desktop */
-const ConnectionLines = () => (
-  <svg
-    className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block"
-    viewBox="0 0 1200 600"
-    preserveAspectRatio="xMidYMid meet"
-    fill="none"
-  >
-    <defs>
-      <linearGradient id="lineGradL" x1="0%" y1="50%" x2="100%" y2="50%">
-        <stop offset="0%" stopColor="rgba(124,58,237,0.05)" />
-        <stop offset="100%" stopColor="rgba(124,58,237,0.3)" />
-      </linearGradient>
-      <linearGradient id="lineGradR" x1="0%" y1="50%" x2="100%" y2="50%">
-        <stop offset="0%" stopColor="rgba(124,58,237,0.3)" />
-        <stop offset="100%" stopColor="rgba(124,58,237,0.05)" />
-      </linearGradient>
-    </defs>
-    {/* Left lines */}
-    {[0, 1, 2, 3].map((i) => {
-      const y = 75 + i * 140;
-      return (
-        <motion.line
-          key={`l-${i}`}
-          x1="320" y1={y} x2="555" y2="300"
-          stroke="url(#lineGradL)"
-          strokeWidth="1"
-          initial={{ pathLength: 0, opacity: 0 }}
-          whileInView={{ pathLength: 1, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 + i * 0.1 }}
-        />
-      );
-    })}
-    {/* Right lines */}
-    {[0, 1, 2, 3].map((i) => {
-      const y = 75 + i * 140;
-      return (
-        <motion.line
-          key={`r-${i}`}
-          x1="645" y1="300" x2="880" y2={y}
-          stroke="url(#lineGradR)"
-          strokeWidth="1"
-          initial={{ pathLength: 0, opacity: 0 }}
-          whileInView={{ pathLength: 1, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 + i * 0.1 }}
-        />
-      );
-    })}
-  </svg>
-);
+/* Dynamic SVG connection lines */
+const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => {
+  // Grid layout: left cards at x~27%, right cards at x~73%, center at 50%
+  // 4 rows evenly spaced within the container
+  const rows = [0, 1, 2, 3];
+  const totalRows = 4;
+  const padY = 8; // percent padding top/bottom
+  const centerX = 50;
+  const centerY = 50;
+  const leftCardX = 30; // right edge of left cards (percentage)
+  const rightCardX = 70; // left edge of right cards
+
+  return (
+    <svg
+      className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block"
+      preserveAspectRatio="none"
+      viewBox="0 0 100 100"
+      fill="none"
+    >
+      <defs>
+        <filter id="lineGlow">
+          <feGaussianBlur stdDeviation="0.5" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      {rows.map((i) => {
+        const rowY = padY + ((100 - padY * 2) / (totalRows - 1)) * i;
+        const isLeftHovered = hoveredIndex === i;
+        const isRightHovered = hoveredIndex === i + 4;
+        return (
+          <g key={i}>
+            {/* Left line */}
+            <motion.line
+              x1={leftCardX} y1={rowY} x2={centerX} y2={centerY}
+              stroke="hsl(var(--primary))"
+              strokeWidth={isLeftHovered ? "0.4" : "0.2"}
+              opacity={isLeftHovered ? 0.8 : 0.3}
+              filter="url(#lineGlow)"
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: isLeftHovered ? 0.8 : 0.3 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 + i * 0.1 }}
+            />
+            {/* Right line */}
+            <motion.line
+              x1={centerX} y1={centerY} x2={rightCardX} y2={rowY}
+              stroke="hsl(var(--primary))"
+              strokeWidth={isRightHovered ? "0.4" : "0.2"}
+              opacity={isRightHovered ? 0.8 : 0.3}
+              filter="url(#lineGlow)"
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: isRightHovered ? 0.8 : 0.3 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 + i * 0.1 }}
+            />
+          </g>
+        );
+      })}
+    </svg>
+  );
+};
 
 const ModulesSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <section id="modules" className="relative py-24 overflow-hidden" style={{ backgroundColor: "#0B0B0F" }}>
@@ -218,33 +204,45 @@ const ModulesSection = () => {
             What You'll{" "}
             <span
               className="text-gradient"
-              style={{ filter: "drop-shadow(0 0 20px rgba(124,58,237,0.4))" }}
+              style={{ filter: "drop-shadow(0 0 20px hsla(var(--primary), 0.4))" }}
             >
               Learn
             </span>
           </motion.h2>
         </div>
 
-        {/* Radial layout — desktop */}
-        <div className="relative hidden lg:block" style={{ minHeight: 600 }}>
-          <ConnectionLines />
+        {/* Radial layout — desktop: CSS Grid for perfect symmetry */}
+        <div className="relative hidden lg:grid" style={{ gridTemplateColumns: "1fr auto 1fr", minHeight: 560 }}>
+          <ConnectionLines hoveredIndex={hoveredIndex} />
 
           {/* Left cards */}
-          <div className="absolute left-0 top-0 w-[320px] space-y-4" style={{ top: 20 }}>
+          <div className="flex flex-col justify-between py-2 pr-8 z-10">
             {leftModules.map((m, i) => (
-              <ModuleCard key={m.title} module={m} index={i} side="left" />
+              <ModuleCard
+                key={m.title}
+                module={m}
+                index={i}
+                side="left"
+                onHover={(h) => setHoveredIndex(h ? i : null)}
+              />
             ))}
           </div>
 
           {/* Center */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+          <div className="flex items-center justify-center z-10">
             <CenterAvatar />
           </div>
 
           {/* Right cards */}
-          <div className="absolute right-0 top-0 w-[320px] space-y-4" style={{ top: 20 }}>
+          <div className="flex flex-col justify-between py-2 pl-8 z-10">
             {rightModules.map((m, i) => (
-              <ModuleCard key={m.title} module={m} index={i} side="right" />
+              <ModuleCard
+                key={m.title}
+                module={m}
+                index={i}
+                side="right"
+                onHover={(h) => setHoveredIndex(h ? i + 4 : null)}
+              />
             ))}
           </div>
         </div>
