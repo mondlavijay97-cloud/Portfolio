@@ -44,13 +44,17 @@ const ModuleCard = ({
       <motion.div
         whileHover={{ y: -4, scale: 1.02 }}
         transition={{ duration: 0.25 }}
-        className="relative flex items-start gap-4 rounded-xl p-4 border transition-all duration-300"
+        className="relative flex items-start gap-4 rounded-xl p-[1px] overflow-hidden transition-all duration-300"
         style={{
-          backgroundColor: "hsl(var(--card))",
-          borderColor: hovered ? "hsla(var(--primary), 0.4)" : "hsla(var(--primary), 0.15)",
+          background: "conic-gradient(from var(--border-angle, 0deg), hsla(var(--primary), 0.05), hsla(var(--primary), 0.6), hsla(var(--primary), 0.05), hsla(var(--primary), 0.6))",
+          animation: "borderSpin 3s linear infinite",
           boxShadow: hovered ? "0 0 24px hsla(var(--primary), 0.2)" : "none",
         }}
       >
+        <div
+          className="flex items-start gap-4 rounded-[11px] p-4 w-full h-full"
+          style={{ backgroundColor: "hsl(var(--card))" }}
+        >
         <div
           className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300"
           style={{
@@ -65,6 +69,7 @@ const ModuleCard = ({
           <p className="text-xs text-muted-foreground leading-relaxed">
             {module.bullets.join(" · ")}
           </p>
+        </div>
         </div>
       </motion.div>
     </motion.div>
