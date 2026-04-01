@@ -12,8 +12,9 @@ const HeroSection = () => (
       {/* Copy */}
       <div className="space-y-6 animate-fade-up">
         <h1 className="text-5xl font-bold leading-tight tracking-tight sm:text-6xl lg:text-6xl">
-          Learn Content Creation That{" "}
-          <span className="text-gradient">Actually Gets You Results</span>
+          Learn Content Creation
+          <br />That Actually Gets You
+          <br /><span className="text-gradient">Results</span>
         </h1>
         <p className="text-lg text-muted-foreground max-w-lg">
           From zero → to creating, growing & monetizing content using AI
