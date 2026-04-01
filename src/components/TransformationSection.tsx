@@ -16,7 +16,7 @@ const TransformationSection = () => (
       <div className="flex flex-wrap justify-center gap-4">
         {outcomes.map((o, i) => (
           <div key={o} className="flex items-center gap-3">
-            <span className="rounded-xl border border-border/50 bg-card px-5 py-3 font-medium">{o}</span>
+            <span className="rounded-xl border border-primary/20 glass-card px-5 py-3 font-medium transition-all hover:border-primary/40 hover:glow-purple">{o}</span>
             {i < outcomes.length - 1 && <ArrowRight size={16} className="text-primary hidden sm:block" />}
           </div>
         ))}

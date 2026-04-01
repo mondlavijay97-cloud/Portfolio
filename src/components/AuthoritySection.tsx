@@ -15,8 +15,8 @@ const AuthoritySection = () => (
       </h2>
       <div className="grid gap-4 sm:grid-cols-2">
         {points.map(({ icon: Icon, text }) => (
-          <div key={text} className="flex items-center gap-3 rounded-xl border border-border/50 bg-background/50 p-5">
-            <Icon size={20} className="shrink-0 text-accent icon-glow" />
+          <div key={text} className="flex items-center gap-3 rounded-xl border border-primary/20 glass-card p-5 transition-all hover:border-primary/40 hover:glow-purple">
+            <Icon size={20} className="shrink-0 text-primary icon-glow" />
             <span>{text}</span>
           </div>
         ))}
