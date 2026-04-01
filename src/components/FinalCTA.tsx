@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 const FinalCTA = () => (
   <section className="py-24 section-alt relative overflow-hidden">
