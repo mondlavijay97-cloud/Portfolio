@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { ShinyButtonLink } from "@/components/ui/shiny-button";
 import { Menu, X, ArrowRight } from "lucide-react";
 
 const navLinks = [
@@ -25,9 +25,9 @@ const Header = () => {
               {l.label}
             </a>
           ))}
-          <Button variant="gradient" size="sm" asChild>
-            <a href="#pricing">Enroll Now <ArrowRight size={16} /></a>
-          </Button>
+          <ShinyButtonLink href="#pricing" className="!py-2 !px-5 !text-sm">
+            Enroll Now <ArrowRight size={16} />
+          </ShinyButtonLink>
         </nav>
 
         <button className="md:hidden text-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
@@ -43,9 +43,9 @@ const Header = () => {
                 {l.label}
               </a>
             ))}
-            <Button variant="gradient" size="lg" asChild>
-              <a href="#pricing" onClick={() => setMobileOpen(false)}>Enroll Now <ArrowRight size={18} /></a>
-            </Button>
+            <ShinyButtonLink href="#pricing" className="text-center">
+              Enroll Now <ArrowRight size={18} />
+            </ShinyButtonLink>
           </nav>
         </div>
       )}

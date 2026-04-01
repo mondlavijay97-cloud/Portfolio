@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { Play, ArrowRight } from "lucide-react";
+import { ShinyButtonLink } from "@/components/ui/shiny-button";
 import heroImage from "@/assets/hero-creator.jpg";
 
 const HeroSection = () => (
@@ -11,7 +11,7 @@ const HeroSection = () => (
     <div className="container grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
       {/* Copy */}
       <div className="space-y-6 animate-fade-up">
-        <h1 className="text-5xl font-bold leading-tight tracking-tight sm:text-6xl lg:text-6xl">
+        <h1 className="text-6xl font-bold leading-tight tracking-tight sm:text-6xl lg:text-5xl">
           Learn Content Creation That{" "}
           <span className="text-gradient">Actually Gets You Results</span>
         </h1>
@@ -22,12 +22,12 @@ const HeroSection = () => (
           Built by a creator with <span className="text-primary-bright font-semibold">80K+ audience</span> & brand collaborations
         </p>
         <div className="flex flex-wrap gap-4 pt-2">
-          <Button variant="gradient" size="xl" asChild>
-            <a href="#pricing">Enroll Now <ArrowRight size={18} /></a>
-          </Button>
-          <Button variant="outline" size="xl" asChild>
-            <a href="#modules">View Curriculum</a>
-          </Button>
+          <ShinyButtonLink href="#pricing">
+            Enroll Now <ArrowRight size={18} />
+          </ShinyButtonLink>
+          <ShinyButtonLink href="#modules" className="!--shiny-cta-highlight: transparent">
+            View Curriculum
+          </ShinyButtonLink>
         </div>
       </div>
 
