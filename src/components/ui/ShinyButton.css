@@ -1,0 +1,165 @@
+/* ── Shiny Button Variables ── */
+.shiny-cta {
+  --shiny-cta-bg: #0B0B0F;
+  --shiny-cta-bg-subtle: #12121A;
+  --shiny-cta-fg: #FFFFFF;
+  --shiny-cta-highlight: #7C3AED;
+  --shiny-cta-highlight-bright: #A855F7;
+  --shiny-cta-highlight-deep: #5B21B6;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.875rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  isolation: isolate;
+}
+
+/* ── Animated conic-gradient border ── */
+.shiny-cta::before,
+.shiny-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.shiny-cta::before {
+  background: conic-gradient(
+    from var(--shiny-angle, 0deg),
+    var(--shiny-cta-highlight-deep) 0%,
+    var(--shiny-cta-highlight) 25%,
+    var(--shiny-cta-highlight-bright) 50%,
+    var(--shiny-cta-highlight) 75%,
+    var(--shiny-cta-highlight-deep) 100%
+  );
+  animation: shiny-rotate 3s linear infinite;
+  z-index: -2;
+}
+
+.shiny-cta::after {
+  inset: 2px;
+  background: var(--shiny-cta-bg);
+  border-radius: calc(0.875rem - 2px);
+  z-index: -1;
+}
+
+/* ── Content layer ── */
+.shiny-cta__content {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--shiny-cta-fg);
+}
+
+/* ── Shimmer overlay ── */
+.shiny-cta__content::after {
+  content: "";
+  position: absolute;
+  inset: -100% -50%;
+  background: linear-gradient(
+    90deg,
+    transparent 20%,
+    rgba(168, 85, 247, 0.08) 40%,
+    rgba(124, 58, 237, 0.15) 50%,
+    rgba(168, 85, 247, 0.08) 60%,
+    transparent 80%
+  );
+  animation: shiny-shimmer 3s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* ── Hover / Active states ── */
+.shiny-cta:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 0 20px rgba(124, 58, 237, 0.4),
+    0 0 60px rgba(124, 58, 237, 0.15);
+}
+
+.shiny-cta:active {
+  transform: scale(1.02) translateY(1px);
+}
+
+/* ── Idle pulse ── */
+.shiny-cta {
+  animation: shiny-pulse 4s ease-in-out infinite;
+}
+
+/* ===========================
+   SECONDARY VARIANT
+   =========================== */
+.shiny-cta--secondary::before {
+  opacity: 0.5;
+  animation-duration: 4.5s;
+}
+
+.shiny-cta--secondary::after {
+  background: transparent;
+}
+
+.shiny-cta--secondary {
+  border: 1px solid var(--shiny-cta-highlight-deep);
+  background: transparent;
+  animation: none;
+}
+
+.shiny-cta--secondary .shiny-cta__content::after {
+  opacity: 0.5;
+  animation-duration: 4s;
+}
+
+.shiny-cta--secondary:hover {
+  transform: scale(1.03);
+  background: linear-gradient(
+    135deg,
+    var(--shiny-cta-highlight-deep),
+    var(--shiny-cta-highlight)
+  );
+  border-color: var(--shiny-cta-highlight);
+  box-shadow:
+    0 0 15px rgba(124, 58, 237, 0.3),
+    0 0 40px rgba(124, 58, 237, 0.1);
+}
+
+.shiny-cta--secondary:active {
+  transform: scale(1.01) translateY(1px);
+}
+
+/* ── Keyframes ── */
+@keyframes shiny-rotate {
+  from { --shiny-angle: 0deg; }
+  to { --shiny-angle: 360deg; }
+}
+
+@keyframes shiny-shimmer {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+}
+
+@keyframes shiny-pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(124, 58, 237, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(124, 58, 237, 0.3);
+  }
+}
+
+/* ── @property for conic-gradient animation ── */
+@property --shiny-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
