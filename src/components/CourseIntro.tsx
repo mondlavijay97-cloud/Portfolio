@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
 import { Sparkles, Zap, Target } from "lucide-react";
+import ShinyButton from "@/components/ui/ShinyButton";
 
 const CourseIntro = () => (
   <section className="py-20 section-alt">
@@ -20,9 +20,9 @@ const CourseIntro = () => (
           </div>
         ))}
       </div>
-      <Button variant="gradient" size="lg" asChild>
-        <a href="#modules">View Curriculum</a>
-      </Button>
+      <a href="#modules">
+        <ShinyButton variant="secondary" size="lg">View Curriculum</ShinyButton>
+      </a>
     </div>
   </section>
 );
