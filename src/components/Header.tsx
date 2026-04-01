@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 
 const navLinks = [
   { label: "Curriculum", href: "#modules" },
@@ -26,7 +26,7 @@ const Header = () => {
             </a>
           ))}
           <Button variant="gradient" size="sm" asChild>
-            <a href="#pricing">Enroll Now</a>
+            <a href="#pricing">Enroll Now <ArrowRight size={16} /></a>
           </Button>
         </nav>
 
@@ -44,7 +44,7 @@ const Header = () => {
               </a>
             ))}
             <Button variant="gradient" size="lg" asChild>
-              <a href="#pricing" onClick={() => setMobileOpen(false)}>Enroll Now</a>
+              <a href="#pricing" onClick={() => setMobileOpen(false)}>Enroll Now <ArrowRight size={18} /></a>
             </Button>
           </nav>
         </div>

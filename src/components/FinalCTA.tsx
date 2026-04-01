@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 const FinalCTA = () => (
   <section className="py-24 section-alt relative overflow-hidden">
@@ -9,8 +10,8 @@ const FinalCTA = () => (
         <span className="text-gradient">Start Creating.</span>
       </h2>
       <div className="flex flex-wrap justify-center gap-4">
-        <Button variant="gradient" size="xl">Enroll Now – ₹4,999</Button>
-        <Button variant="outline" size="xl">Get Live Support – ₹6,999</Button>
+        <Button variant="gradient" size="xl">Enroll Now – ₹4,999 <ArrowRight size={18} /></Button>
+        <Button variant="outline" size="xl">Get Live Support – ₹6,999 <ArrowRight size={18} /></Button>
       </div>
     </div>
   </section>

@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Play } from "lucide-react";
+import { Play, ArrowRight } from "lucide-react";
 import heroImage from "@/assets/hero-creator.jpg";
 
 const HeroSection = () => (
@@ -11,7 +11,7 @@ const HeroSection = () => (
     <div className="container grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
       {/* Copy */}
       <div className="space-y-6 animate-fade-up">
-        <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-5xl">
+        <h1 className="text-5xl font-bold leading-tight tracking-tight sm:text-6xl lg:text-6xl">
           Learn Content Creation That{" "}
           <span className="text-gradient">Actually Gets You Results</span>
         </h1>
@@ -23,7 +23,7 @@ const HeroSection = () => (
         </p>
         <div className="flex flex-wrap gap-4 pt-2">
           <Button variant="gradient" size="xl" asChild>
-            <a href="#pricing">Enroll Now</a>
+            <a href="#pricing">Enroll Now <ArrowRight size={18} /></a>
           </Button>
           <Button variant="outline" size="xl" asChild>
             <a href="#modules">View Curriculum</a>
@@ -33,7 +33,7 @@ const HeroSection = () => (
 
       {/* Video placeholder */}
       <div className="relative group animate-fade-up flex justify-center" style={{ animationDelay: "0.15s" }}>
-        <div className="rounded-2xl overflow-hidden border border-primary/20 glass-card max-w-[280px] w-full">
+        <div className="rounded-2xl overflow-hidden border border-primary/20 glass-card max-w-[340px] w-full">
           <img src={heroImage} alt="Creator workspace" width={1024} height={768} className="w-full object-cover aspect-[9/16]" />
           <div className="absolute inset-0 flex items-center justify-center bg-background/40 rounded-2xl transition-colors group-hover:bg-background/20">
             <div className="flex items-center gap-3 rounded-full bg-gradient-cta px-5 py-2.5 glow-purple">
