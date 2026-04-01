@@ -78,8 +78,8 @@ const ProblemCard = ({
         scale: isHovered ? 1.08 : isFaded ? 0.95 : 1,
         opacity: isFaded ? 0.4 : 1,
         filter: isFaded ? "blur(2px)" : "blur(0px)",
+        transition: { type: "spring", stiffness: 300, damping: 25 },
       }}
-      transition={{ type: "spring", stiffness: 300, damping: 25 }}
     >
       {/* Float animation wrapper */}
       <motion.div
