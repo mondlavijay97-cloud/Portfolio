@@ -1,4 +1,4 @@
-import { ShinyButton } from "@/components/ui/shiny-button";
+import { Button } from "@/components/ui/button";
 import { Check, ArrowRight } from "lucide-react";
 
 const plans = [
@@ -49,9 +49,9 @@ const PricingSection = () => (
                 </li>
               ))}
             </ul>
-            <ShinyButton className="w-full">
+            <Button variant={plan.highlighted ? "gradient" : "outline"} size="lg" className="w-full">
               Enroll Now <ArrowRight size={18} />
-            </ShinyButton>
+            </Button>
           </div>
         ))}
       </div>
