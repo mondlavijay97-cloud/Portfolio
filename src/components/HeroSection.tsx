@@ -3,15 +3,15 @@ import { Play, ArrowRight } from "lucide-react";
 import heroImage from "@/assets/hero-creator.jpg";
 
 const HeroSection = () => (
-  <section className="relative pt-24 pb-16 overflow-hidden">
+  <section className="relative min-h-screen flex items-center overflow-hidden pt-16 pb-8">
     {/* Ambient glow */}
     <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-primary/15 blur-[120px] pointer-events-none" />
     <div className="absolute bottom-0 right-1/4 w-72 h-72 rounded-full bg-primary-bright/10 blur-[100px] pointer-events-none" />
 
     <div className="container grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:gap-10 items-center">
       {/* Copy */}
-      <div className="space-y-6 animate-fade-up">
-        <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-[3.25rem]">
+      <div className="space-y-8 animate-fade-up">
+        <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-[4rem]">
           Learn Content Creation
           <br />That Actually Gets You
           <br /><span className="text-gradient">Results</span>
