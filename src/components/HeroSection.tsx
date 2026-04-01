@@ -34,7 +34,7 @@ const HeroSection = () => (
       {/* Video placeholder */}
       <div className="relative group animate-fade-up" style={{ animationDelay: "0.15s" }}>
         <div className="rounded-2xl overflow-hidden border border-primary/20 glass-card">
-          <img src={heroImage} alt="Creator workspace" width={1024} height={768} className="w-full object-cover aspect-video" />
+          <img src={heroImage} alt="Creator workspace" width={1024} height={768} className="w-full object-cover aspect-[9/16]" />
           <div className="absolute inset-0 flex items-center justify-center bg-background/40 rounded-2xl transition-colors group-hover:bg-background/20">
             <div className="flex items-center gap-3 rounded-full bg-gradient-cta px-6 py-3 glow-purple">
               <Play size={20} className="fill-foreground text-foreground" />
