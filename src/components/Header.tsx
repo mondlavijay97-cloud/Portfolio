@@ -26,7 +26,7 @@ const Header = () => {
             </a>
           ))}
           <Button variant="gradient" size="sm" asChild>
-            <a href="#pricing">Enroll Now</a>
+            <a href="#pricing">Enroll Now <ArrowRight size={16} /></a>
           </Button>
         </nav>
 
