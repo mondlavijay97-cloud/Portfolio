@@ -69,7 +69,6 @@ const ModuleCard = ({
             {module.bullets.join(" · ")}
           </p>
         </div>
-        </div>
       </motion.div>
     </motion.div>
   );
