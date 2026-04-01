@@ -44,7 +44,7 @@ const Header = () => {
               </a>
             ))}
             <Button variant="gradient" size="lg" asChild>
-              <a href="#pricing" onClick={() => setMobileOpen(false)}>Enroll Now</a>
+              <a href="#pricing" onClick={() => setMobileOpen(false)}>Enroll Now <ArrowRight size={18} /></a>
             </Button>
           </nav>
         </div>

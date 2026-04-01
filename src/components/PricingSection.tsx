@@ -50,7 +50,7 @@ const PricingSection = () => (
               ))}
             </ul>
             <Button variant={plan.highlighted ? "gradient" : "outline"} size="lg" className="w-full">
-              Enroll Now
+              Enroll Now <ArrowRight size={18} />
             </Button>
           </div>
         ))}
