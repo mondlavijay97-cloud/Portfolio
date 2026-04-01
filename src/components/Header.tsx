@@ -13,7 +13,7 @@ const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/70 backdrop-blur-xl">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
       <div className="container flex h-16 items-center justify-between">
         <a href="#" className="font-heading text-xl font-bold tracking-tight">
           <span className="text-gradient">Nomad</span> School
@@ -36,7 +36,7 @@ const Header = () => {
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-border bg-background/95 backdrop-blur-xl md:hidden">
+        <div className="border-t border-border/50 bg-background/95 backdrop-blur-xl md:hidden">
           <nav className="container flex flex-col gap-4 py-6">
             {navLinks.map((l) => (
               <a key={l.href} href={l.href} onClick={() => setMobileOpen(false)} className="text-muted-foreground hover:text-foreground">

@@ -17,9 +17,8 @@ const plans = [
 ];
 
 const PricingSection = () => (
-  <section id="pricing" className="py-20 relative overflow-hidden">
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-primary/10 blur-[180px] pointer-events-none" />
-    <div className="container space-y-12 relative">
+  <section id="pricing" className="py-20">
+    <div className="container space-y-12">
       <h2 className="text-3xl font-bold text-center sm:text-4xl">
         Choose Your <span className="text-gradient">Plan</span>
       </h2>
@@ -27,10 +26,10 @@ const PricingSection = () => (
         {plans.map((plan) => (
           <div
             key={plan.name}
-            className={`rounded-2xl p-8 space-y-6 transition-all duration-300 ${
+            className={`rounded-2xl border p-8 space-y-6 ${
               plan.highlighted
-                ? "glass-card glow-combined relative border-primary/40"
-                : "glass-card glass-card-hover"
+                ? "border-primary/50 bg-card glow-purple relative"
+                : "border-border/50 bg-card"
             }`}
           >
             {plan.highlighted && (
@@ -40,12 +39,12 @@ const PricingSection = () => (
             )}
             <div>
               <h3 className="text-lg font-bold">{plan.name}</h3>
-              <p className="text-3xl font-bold mt-2 text-gradient-subtle">{plan.price}</p>
+              <p className="text-3xl font-bold mt-2">{plan.price}</p>
             </div>
             <ul className="space-y-3">
               {plan.features.map((f) => (
                 <li key={f} className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Check size={16} className="text-primary-highlight icon-glow" /> {f}
+                  <Check size={16} className="text-accent" /> {f}
                 </li>
               ))}
             </ul>
