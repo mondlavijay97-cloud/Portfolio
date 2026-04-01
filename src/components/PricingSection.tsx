@@ -17,8 +17,9 @@ const plans = [
 ];
 
 const PricingSection = () => (
-  <section id="pricing" className="py-20">
-    <div className="container space-y-12">
+  <section id="pricing" className="py-20 relative">
+    <div className="absolute inset-0 bg-glow pointer-events-none" />
+    <div className="container space-y-12 relative">
       <h2 className="text-3xl font-bold text-center sm:text-4xl">
         Choose Your <span className="text-gradient">Plan</span>
       </h2>
@@ -26,10 +27,10 @@ const PricingSection = () => (
         {plans.map((plan) => (
           <div
             key={plan.name}
-            className={`rounded-2xl border p-8 space-y-6 ${
+            className={`rounded-2xl border p-8 space-y-6 transition-all ${
               plan.highlighted
-                ? "border-primary/50 bg-card glow-purple relative"
-                : "border-border/50 bg-card"
+                ? "border-primary/50 glass-card glow-purple relative"
+                : "border-primary/20 glass-card"
             }`}
           >
             {plan.highlighted && (
@@ -44,7 +45,7 @@ const PricingSection = () => (
             <ul className="space-y-3">
               {plan.features.map((f) => (
                 <li key={f} className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Check size={16} className="text-accent" /> {f}
+                  <Check size={16} className="text-primary-bright" /> {f}
                 </li>
               ))}
             </ul>

@@ -15,7 +15,7 @@ const BonusesSection = () => (
       </h2>
       <div className="grid gap-4 sm:grid-cols-2">
         {bonuses.map((b) => (
-          <div key={b} className="flex items-center gap-3 rounded-xl border border-primary/20 bg-card p-5 text-left">
+          <div key={b} className="flex items-center gap-3 rounded-xl border border-primary/20 glass-card p-5 text-left transition-all hover:border-primary/40 hover:glow-purple">
             <Gift size={18} className="shrink-0 text-primary icon-glow" />
             <span>{b}</span>
           </div>
