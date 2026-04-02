@@ -1,21 +1,46 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Brain, Lightbulb, Bookmark, TrendingDown, Zap } from "lucide-react";
+import { Brain, Lightbulb, Bookmark, TrendingDown } from "lucide-react";
 
 const confusionCards = [
-  { icon: Brain, title: "Don't know what to post", rotation: -2.5, x: "5%", y: "8%" },
-  { icon: Lightbulb, title: "Overthinking content ideas", rotation: 3, x: "55%", y: "2%" },
-  { icon: Bookmark, title: "Saving reels but not executing", rotation: -1.5, x: "10%", y: "55%" },
-  { icon: TrendingDown, title: "Feeling left behind", rotation: 2.5, x: "58%", y: "50%" },
+  { icon: Brain, title: "Don't know what to post", quadrant: "top-left" },
+  { icon: Lightbulb, title: "Overthinking content ideas", quadrant: "top-right" },
+  { icon: Bookmark, title: "Saving reels but not executing", quadrant: "bottom-left" },
+  { icon: TrendingDown, title: "Feeling left behind", quadrant: "bottom-right" },
 ];
 
+/* ── Expanding radar ripples ── */
+const Ripples = () => (
+  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+    {[0, 1, 2, 3].map((i) => (
+      <motion.div
+        key={i}
+        className="absolute rounded-full"
+        style={{
+          width: 280 + i * 120,
+          height: 280 + i * 120,
+          border: "1px solid hsl(var(--primary) / 0.12)",
+        }}
+        animate={{ scale: [1, 1.6], opacity: [0.3, 0] }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          delay: i * 1,
+          ease: "easeOut",
+        }}
+      />
+    ))}
+  </div>
+);
+
+/* ── Floating particles ── */
 const Particles = () => {
-  const particles = Array.from({ length: 20 }, (_, i) => ({
+  const particles = Array.from({ length: 15 }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
-    y: Math.random() * 50,
-    size: Math.random() * 2.5 + 1,
-    duration: Math.random() * 8 + 6,
+    y: Math.random() * 100,
+    size: Math.random() * 2 + 1,
+    dur: Math.random() * 8 + 6,
     delay: Math.random() * 4,
   }));
 
@@ -30,129 +55,225 @@ const Particles = () => {
             top: `${p.y}%`,
             width: p.size,
             height: p.size,
-            background: "hsl(263 84% 58% / 0.3)",
+            background: "hsl(var(--primary) / 0.25)",
           }}
-          animate={{ y: [0, -20, 0], opacity: [0.15, 0.5, 0.15] }}
-          transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: "easeInOut" }}
+          animate={{ y: [0, -15, 0], opacity: [0.1, 0.4, 0.1] }}
+          transition={{ duration: p.dur, repeat: Infinity, delay: p.delay, ease: "easeInOut" }}
         />
       ))}
     </div>
   );
 };
 
+/* ── Center clarity hub ── */
+const ClarityHub = () => (
+  <div className="relative flex items-center justify-center">
+    {/* Outer ring 3 */}
+    <div
+      className="absolute w-[320px] h-[320px] md:w-[380px] md:h-[380px] rounded-full"
+      style={{
+        border: "1px solid hsl(var(--primary) / 0.08)",
+      }}
+    />
+    {/* Outer ring 2 */}
+    <div
+      className="absolute w-[270px] h-[270px] md:w-[320px] md:h-[320px] rounded-full"
+      style={{
+        border: "1px solid hsl(var(--primary) / 0.15)",
+      }}
+    />
+    {/* Outer ring 1 */}
+    <div
+      className="absolute w-[230px] h-[230px] md:w-[270px] md:h-[270px] rounded-full"
+      style={{
+        border: "1px solid hsl(var(--primary) / 0.22)",
+      }}
+    />
+
+    {/* Core circle */}
+    <div
+      className="relative w-[200px] h-[200px] md:w-[240px] md:h-[240px] rounded-full flex items-center justify-center backdrop-blur-md z-10"
+      style={{
+        background: "radial-gradient(circle, hsl(var(--surface)) 0%, hsl(var(--background)) 100%)",
+        border: "1.5px solid hsl(var(--primary) / 0.4)",
+        boxShadow:
+          "0 0 60px hsl(var(--primary) / 0.15), 0 0 120px hsl(var(--primary) / 0.08), inset 0 0 40px hsl(var(--primary) / 0.06)",
+      }}
+    >
+      <div className="text-center px-6 space-y-2">
+        <motion.p
+          className="text-sm md:text-base text-muted-foreground"
+          initial={{ opacity: 0, y: 6 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          Content is not hard.
+        </motion.p>
+        <motion.p
+          className="text-lg md:text-xl font-bold font-heading text-gradient"
+          style={{ filter: "drop-shadow(0 0 16px hsl(var(--primary) / 0.6))" }}
+          initial={{ opacity: 0, y: 6 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 1.3 }}
+        >
+          Clarity is missing.
+        </motion.p>
+      </div>
+    </div>
+  </div>
+);
+
+/* ── SVG connection lines (orthogonal paths) ── */
+const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => (
+  <svg
+    className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
+    viewBox="0 0 1000 700"
+    preserveAspectRatio="xMidYMid meet"
+    fill="none"
+  >
+    <defs>
+      <filter id="line-glow">
+        <feGaussianBlur stdDeviation="3" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+    {/* Top-left: card center → right → down → hub */}
+    <motion.path
+      d="M 230 200 L 420 200 L 420 310 L 460 310"
+      stroke={`hsl(var(--primary) / ${hoveredIndex === 0 ? "0.6" : "0.2"})`}
+      strokeWidth={hoveredIndex === 0 ? 2 : 1}
+      filter="url(#line-glow)"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1.2, delay: 0.3, ease: "easeInOut" }}
+    />
+    {/* Top-right: hub → right → up → card */}
+    <motion.path
+      d="M 540 310 L 580 310 L 580 200 L 770 200"
+      stroke={`hsl(var(--primary) / ${hoveredIndex === 1 ? "0.6" : "0.2"})`}
+      strokeWidth={hoveredIndex === 1 ? 2 : 1}
+      filter="url(#line-glow)"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1.2, delay: 0.5, ease: "easeInOut" }}
+    />
+    {/* Bottom-left: card → right → up → hub */}
+    <motion.path
+      d="M 230 480 L 420 480 L 420 380 L 460 380"
+      stroke={`hsl(var(--primary) / ${hoveredIndex === 2 ? "0.6" : "0.2"})`}
+      strokeWidth={hoveredIndex === 2 ? 2 : 1}
+      filter="url(#line-glow)"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1.2, delay: 0.7, ease: "easeInOut" }}
+    />
+    {/* Bottom-right: hub → right → down → card */}
+    <motion.path
+      d="M 540 380 L 580 380 L 580 480 L 770 480"
+      stroke={`hsl(var(--primary) / ${hoveredIndex === 3 ? "0.6" : "0.2"})`}
+      strokeWidth={hoveredIndex === 3 ? 2 : 1}
+      filter="url(#line-glow)"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1.2, delay: 0.9, ease: "easeInOut" }}
+    />
+  </svg>
+);
+
+/* ── Confusion card ── */
 const ConfusionCard = ({
   item,
   index,
+  onHover,
+  hoveredIndex,
 }: {
   item: (typeof confusionCards)[0];
   index: number;
+  onHover: (i: number | null) => void;
+  hoveredIndex: number | null;
 }) => {
-  const [hovered, setHovered] = useState(false);
   const Icon = item.icon;
+  const isHovered = hoveredIndex === index;
+  const isDimmed = hoveredIndex !== null && !isHovered;
 
   return (
     <motion.div
       className="relative cursor-pointer"
-      initial={{ opacity: 0, y: 30, rotate: item.rotation }}
-      whileInView={{ opacity: 1, y: 0, rotate: item.rotation }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.6, delay: index * 0.15 }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.3 + index * 0.15 }}
+      onMouseEnter={() => onHover(index)}
+      onMouseLeave={() => onHover(null)}
+      whileHover={{ y: -4, scale: 1.02 }}
+      style={{ opacity: isDimmed ? 0.5 : 1, transition: "opacity 0.3s" }}
     >
       {/* Floating animation */}
       <motion.div
-        animate={{
-          y: [0, index % 2 === 0 ? -8 : -5, 0],
-          x: [0, index % 2 === 0 ? 3 : -3, 0],
-        }}
-        transition={{
-          duration: 3.5 + index * 0.7,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        animate={{ y: [0, index % 2 === 0 ? -6 : -4, 0] }}
+        transition={{ duration: 3.5 + index * 0.5, repeat: Infinity, ease: "easeInOut" }}
       >
-        <motion.div
-          animate={hovered ? {
-            x: [0, -2, 2, -1, 1, 0],
-            transition: { duration: 0.4, ease: "easeInOut" }
-          } : {}}
-          className="rounded-xl p-5 overflow-hidden backdrop-blur-md"
+        <div
+          className="rounded-xl p-4 backdrop-blur-md"
           style={{
-            background: "hsl(240 24% 11% / 0.8)",
-            border: `1px solid ${hovered ? "hsl(263 84% 58% / 0.4)" : "hsl(263 84% 58% / 0.12)"}`,
-            boxShadow: hovered
-              ? "0 0 30px hsl(263 84% 58% / 0.2), inset 0 1px 0 hsl(0 0% 100% / 0.05)"
-              : "inset 0 1px 0 hsl(0 0% 100% / 0.03)",
+            background: "hsl(var(--surface) / 0.8)",
+            border: `1px solid hsl(var(--primary) / ${isHovered ? "0.4" : "0.12"})`,
+            boxShadow: isHovered
+              ? "0 0 30px hsl(var(--primary) / 0.15), inset 0 1px 0 hsl(var(--foreground) / 0.04)"
+              : "inset 0 1px 0 hsl(var(--foreground) / 0.03)",
             transition: "border-color 0.3s, box-shadow 0.3s",
           }}
         >
           <div className="flex items-center gap-3">
             <div
-              className="flex items-center justify-center w-10 h-10 rounded-lg shrink-0"
+              className="flex items-center justify-center w-9 h-9 rounded-lg shrink-0"
               style={{
-                background: "linear-gradient(135deg, hsl(263 84% 58% / 0.15), hsl(271 91% 65% / 0.08))",
+                background: "linear-gradient(135deg, hsl(var(--primary) / 0.15), hsl(var(--primary-bright) / 0.08))",
               }}
             >
-              <Icon size={18} style={{ color: "hsl(263 84% 58%)", filter: "drop-shadow(0 0 4px hsl(263 84% 58% / 0.5))" }} />
+              <Icon
+                size={16}
+                style={{
+                  color: "hsl(var(--primary))",
+                  filter: "drop-shadow(0 0 4px hsl(var(--primary) / 0.5))",
+                }}
+              />
             </div>
             <span className="text-sm font-medium text-foreground/80">{item.title}</span>
           </div>
-        </motion.div>
+        </div>
       </motion.div>
     </motion.div>
   );
 };
 
-const GlowingBeam = () => (
-  <div className="relative flex justify-center py-6">
-    <div className="relative w-px h-32">
-      {/* Static line */}
-      <div
-        className="absolute inset-0"
-        style={{ background: "linear-gradient(to bottom, hsl(263 84% 58% / 0.3), hsl(263 84% 58% / 0.05))" }}
-      />
-      {/* Animated light pulse */}
-      <motion.div
-        className="absolute left-1/2 -translate-x-1/2 w-1 rounded-full"
-        style={{
-          height: 40,
-          background: "linear-gradient(to bottom, transparent, hsl(263 84% 58% / 0.8), transparent)",
-          boxShadow: "0 0 12px hsl(263 84% 58% / 0.6), 0 0 24px hsl(263 84% 58% / 0.3)",
-        }}
-        animate={{ top: ["-20%", "120%"] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.5 }}
-      />
-      {/* Glow halo at top */}
-      <div
-        className="absolute -top-2 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full"
-        style={{ background: "radial-gradient(circle, hsl(263 84% 58% / 0.4), transparent 70%)" }}
-      />
-      {/* Glow halo at bottom */}
-      <div
-        className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full"
-        style={{ background: "radial-gradient(circle, hsl(263 84% 58% / 0.5), transparent 70%)" }}
-      />
-    </div>
-  </div>
-);
-
+/* ── Main section ── */
 const ProblemSection = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
     <section className="relative py-24 md:py-32 overflow-hidden" style={{ background: "hsl(var(--background))" }}>
-      {/* Background noise/particles for chaos zone */}
       <Particles />
 
-      {/* Subtle top glow */}
+      {/* Radial glow behind center */}
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, hsl(0 70% 50% / 0.04) 0%, transparent 70%)" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
+        style={{ background: "radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 70%)" }}
       />
 
-      <div className="container max-w-5xl relative z-10">
-        {/* ─── HEADING ─── */}
+      <div className="container max-w-6xl relative z-10">
+        {/* Section label */}
         <motion.div
-          className="text-center mb-16 md:mb-20"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -160,128 +281,60 @@ const ProblemSection = () => {
         >
           <motion.span
             className="inline-block text-xs uppercase tracking-[0.2em] mb-4"
-            style={{ color: "hsl(263 84% 58% / 0.7)" }}
+            style={{ color: "hsl(var(--primary) / 0.7)" }}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
           >
-            The Problem
+            Why You Feel Stuck
           </motion.span>
           <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl font-heading leading-tight">
             You're Not Stuck. You're Just{" "}
-            <span
-              className="text-gradient"
-              style={{ filter: "drop-shadow(0 0 20px hsl(263 84% 58% / 0.5))" }}
-            >
+            <span className="text-gradient" style={{ filter: "drop-shadow(0 0 20px hsl(var(--primary) / 0.5))" }}>
               Confused.
             </span>
           </h2>
         </motion.div>
 
-        {/* ─── CONFUSION ZONE ─── */}
-        <div className="relative mb-4">
-          {/* Scattered cards - desktop: absolute positioning, mobile: grid */}
-          <div className="hidden md:block relative" style={{ height: 320 }}>
-            {confusionCards.map((item, i) => (
-              <div
-                key={item.title}
-                className="absolute"
-                style={{
-                  left: item.x,
-                  top: item.y,
-                  width: "40%",
-                  maxWidth: 320,
-                }}
-              >
-                <ConfusionCard item={item} index={i} />
-              </div>
-            ))}
+        {/* ── Desktop radial layout ── */}
+        <div className="hidden md:block relative" style={{ height: 620 }}>
+          <ConnectionLines hoveredIndex={hoveredIndex} />
+          <Ripples />
+
+          {/* Center hub */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <ClarityHub />
           </div>
 
-          {/* Mobile: simple stacked layout */}
-          <div className="grid gap-3 sm:grid-cols-2 md:hidden">
-            {confusionCards.map((item, i) => (
-              <ConfusionCard key={item.title} item={{ ...item, rotation: 0 }} index={i} />
-            ))}
+          {/* Top-left card */}
+          <div className="absolute" style={{ left: "3%", top: "15%", width: 260 }}>
+            <ConfusionCard item={confusionCards[0]} index={0} onHover={setHoveredIndex} hoveredIndex={hoveredIndex} />
+          </div>
+          {/* Top-right card */}
+          <div className="absolute" style={{ right: "3%", top: "15%", width: 260 }}>
+            <ConfusionCard item={confusionCards[1]} index={1} onHover={setHoveredIndex} hoveredIndex={hoveredIndex} />
+          </div>
+          {/* Bottom-left card */}
+          <div className="absolute" style={{ left: "3%", bottom: "12%", width: 260 }}>
+            <ConfusionCard item={confusionCards[2]} index={2} onHover={setHoveredIndex} hoveredIndex={hoveredIndex} />
+          </div>
+          {/* Bottom-right card */}
+          <div className="absolute" style={{ right: "3%", bottom: "12%", width: 260 }}>
+            <ConfusionCard item={confusionCards[3]} index={3} onHover={setHoveredIndex} hoveredIndex={hoveredIndex} />
           </div>
         </div>
 
-        {/* ─── CONNECTING BEAM ─── */}
-        <GlowingBeam />
-
-        {/* ─── CLARITY ZONE ─── */}
-        <motion.div
-          className="relative text-center pt-4 pb-8"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          {/* Radial glow behind clarity */}
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] pointer-events-none"
-            style={{ background: "radial-gradient(ellipse, hsl(263 84% 58% / 0.12) 0%, transparent 70%)" }}
-          />
-
-          <div className="relative z-10 space-y-4">
-            <motion.p
-              className="text-lg md:text-xl text-muted-foreground"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              Content is not hard.
-            </motion.p>
-            <motion.p
-              className="text-2xl md:text-3xl font-bold font-heading"
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <span
-                className="text-gradient"
-                style={{ filter: "drop-shadow(0 0 20px hsl(263 84% 58% / 0.6))" }}
-              >
-                Clarity
-              </span>{" "}
-              is missing.
-            </motion.p>
-
-            {/* Solution preview card */}
-            <motion.div
-              className="inline-block mt-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              <div
-                className="flex items-center gap-3 px-6 py-4 rounded-xl"
-                style={{
-                  background: "hsl(240 24% 11%)",
-                  border: "1px solid hsl(263 84% 58% / 0.25)",
-                  boxShadow: "0 0 30px hsl(263 84% 58% / 0.1), inset 0 1px 0 hsl(0 0% 100% / 0.05)",
-                }}
-              >
-                <div
-                  className="flex items-center justify-center w-10 h-10 rounded-lg"
-                  style={{
-                    background: "linear-gradient(135deg, hsl(263 84% 58% / 0.2), hsl(271 91% 65% / 0.1))",
-                  }}
-                >
-                  <Zap size={18} style={{ color: "hsl(263 84% 58%)", filter: "drop-shadow(0 0 6px hsl(263 84% 58% / 0.6))" }} />
-                </div>
-                <div className="text-left">
-                  <p className="text-sm font-semibold text-foreground">Structured Content System</p>
-                  <p className="text-xs text-muted-foreground">From confusion to consistent creation</p>
-                </div>
-              </div>
-            </motion.div>
+        {/* ── Mobile layout ── */}
+        <div className="md:hidden space-y-8">
+          <div className="flex justify-center">
+            <ClarityHub />
           </div>
-        </motion.div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {confusionCards.map((item, i) => (
+              <ConfusionCard key={item.title} item={item} index={i} onHover={setHoveredIndex} hoveredIndex={hoveredIndex} />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
