@@ -130,7 +130,7 @@ const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => (
   <svg
     className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
     viewBox="0 0 1000 700"
-    preserveAspectRatio="xMidYMid meet"
+    preserveAspectRatio="none"
     fill="none"
   >
     <defs>
@@ -144,10 +144,11 @@ const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => (
     </defs>
     {/* Top-left: card right edge → bend → circle left */}
     <motion.path
-      d="M 226 137 L 296 137 L 296 315 L 365 315"
+      d="M 273 136 L 330 136 L 330 322 L 388 322"
       stroke={`hsl(var(--primary) / ${hoveredIndex === 0 ? "0.6" : "0.2"})`}
       strokeWidth={hoveredIndex === 0 ? 2 : 1}
       filter="url(#line-glow)"
+      vectorEffect="non-scaling-stroke"
       initial={{ pathLength: 0 }}
       whileInView={{ pathLength: 1 }}
       viewport={{ once: true }}
@@ -155,10 +156,11 @@ const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => (
     />
     {/* Top-right: circle right → bend → card left edge */}
     <motion.path
-      d="M 635 315 L 704 315 L 704 137 L 774 137"
+      d="M 612 322 L 670 322 L 670 136 L 727 136"
       stroke={`hsl(var(--primary) / ${hoveredIndex === 1 ? "0.6" : "0.2"})`}
       strokeWidth={hoveredIndex === 1 ? 2 : 1}
       filter="url(#line-glow)"
+      vectorEffect="non-scaling-stroke"
       initial={{ pathLength: 0 }}
       whileInView={{ pathLength: 1 }}
       viewport={{ once: true }}
@@ -166,10 +168,11 @@ const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => (
     />
     {/* Bottom-left: card right edge → bend → circle left */}
     <motion.path
-      d="M 226 584 L 296 584 L 296 385 L 365 385"
+      d="M 273 585 L 330 585 L 330 378 L 388 378"
       stroke={`hsl(var(--primary) / ${hoveredIndex === 2 ? "0.6" : "0.2"})`}
       strokeWidth={hoveredIndex === 2 ? 2 : 1}
       filter="url(#line-glow)"
+      vectorEffect="non-scaling-stroke"
       initial={{ pathLength: 0 }}
       whileInView={{ pathLength: 1 }}
       viewport={{ once: true }}
@@ -177,10 +180,11 @@ const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => (
     />
     {/* Bottom-right: circle right → bend → card left edge */}
     <motion.path
-      d="M 635 385 L 704 385 L 704 584 L 774 584"
+      d="M 612 378 L 670 378 L 670 585 L 727 585"
       stroke={`hsl(var(--primary) / ${hoveredIndex === 3 ? "0.6" : "0.2"})`}
       strokeWidth={hoveredIndex === 3 ? 2 : 1}
       filter="url(#line-glow)"
+      vectorEffect="non-scaling-stroke"
       initial={{ pathLength: 0 }}
       whileInView={{ pathLength: 1 }}
       viewport={{ once: true }}
