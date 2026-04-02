@@ -158,7 +158,7 @@ const AuthoritySection = () => (
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-xs font-semibold tracking-[0.25em] uppercase"
+          className="text-sm font-semibold tracking-[0.25em] uppercase"
           style={{ color: "hsl(var(--primary))", opacity: 0.7 }}
         >
           Your Mentor

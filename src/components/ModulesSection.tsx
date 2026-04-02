@@ -337,7 +337,7 @@ const ModulesSection = () => {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.5 }}
-            className="text-xs font-semibold tracking-[0.25em] text-primary/70 uppercase"
+            className="text-sm font-semibold tracking-[0.25em] text-primary/70 uppercase"
           >
             Complete Learning Ecosystem
           </motion.p>
