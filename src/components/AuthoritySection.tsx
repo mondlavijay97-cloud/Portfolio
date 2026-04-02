@@ -170,7 +170,8 @@ const AuthoritySection = () => (
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-4xl sm:text-5xl lg:text-6xl font-bold font-heading"
         >
-          Learn From Someone Who's{" "}
+          Learn From Someone Who's
+          <br />
           <span className="text-gradient" style={{ filter: "drop-shadow(0 0 20px hsla(var(--primary), 0.4))" }}>
             Done It
           </span>
