@@ -295,17 +295,21 @@ const OpportunitySection = () => {
                 >
                   <motion.div
                     className="flex items-center gap-3 rounded-xl px-5 py-4"
-                    style={{ background: "hsl(var(--surface))" }}
+                    style={{
+                      background: "hsl(var(--surface))",
+                      borderWidth: 1,
+                      borderStyle: "solid",
+                    }}
                     animate={{
                       borderColor: isHovered
-                        ? "hsl(var(--primary) / 0.6)"
-                        : ["hsl(var(--primary) / 0.1)", "hsl(var(--primary) / 0.3)", "hsl(var(--primary) / 0.1)"],
+                        ? "hsl(271 81% 56% / 0.6)"
+                        : ["hsl(271 81% 56% / 0.1)", "hsl(271 81% 56% / 0.3)", "hsl(271 81% 56% / 0.1)"],
                       boxShadow: isHovered
-                        ? "0 8px 30px hsl(var(--primary) / 0.15), 0 0 20px hsl(var(--primary) / 0.08)"
+                        ? "0 8px 30px hsl(271 81% 56% / 0.15), 0 0 20px hsl(271 81% 56% / 0.08)"
                         : [
-                            "0 0 4px hsl(var(--primary) / 0.05)",
-                            "0 0 10px hsl(var(--primary) / 0.12)",
-                            "0 0 4px hsl(var(--primary) / 0.05)",
+                            "0 0 4px hsl(271 81% 56% / 0.05)",
+                            "0 0 10px hsl(271 81% 56% / 0.12)",
+                            "0 0 4px hsl(271 81% 56% / 0.05)",
                           ],
                     }}
                     transition={{
@@ -313,8 +317,6 @@ const OpportunitySection = () => {
                       repeat: Infinity,
                       ease: "easeInOut",
                     }}
-                    // @ts-ignore – border shorthand for framer
-                    css={{ border: "1px solid" }}
                   >
                     <div
                       className="flex items-center justify-center w-9 h-9 rounded-lg shrink-0"
