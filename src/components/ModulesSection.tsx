@@ -77,49 +77,7 @@ const ModuleCard = ({
 /* Premium 3-layer center hub */
 const CenterHub = () => (
   <div className="relative flex items-center justify-center" style={{ width: 220, height: 220 }}>
-    {/* Expanding ripple waves — rendered via box-shadow to avoid overflow clipping */}
-    {[0, 1, 2, 3].map((i) => (
-      <motion.div
-        key={`ripple-${i}`}
-        className="absolute rounded-full pointer-events-none"
-        style={{
-          width: 96,
-          height: 96,
-          border: "1.5px solid hsla(var(--primary), 0.35)",
-          boxShadow: "0 0 8px hsla(var(--primary), 0.15)",
-        }}
-        animate={{
-          scale: [1, 3.5],
-          opacity: [0.5, 0],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          delay: i * 1,
-          ease: "easeOut",
-        }}
-      />
-    ))}
 
-    {/* Ripple waves — matching Authority section */}
-    {[0, 1, 2, 3].map((i) => (
-      <motion.div
-        key={`ripple-${i}`}
-        className="absolute rounded-full"
-        style={{
-          width: 100,
-          height: 100,
-          border: "1.5px solid rgba(124, 58, 237, 0.55)",
-        }}
-        animate={{ scale: [0.5, 2.5], opacity: [0.5, 0.45, 0] }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          delay: i * 1,
-          ease: "easeOut",
-        }}
-      />
-    ))}
 
     {/* Inner core */}
     <motion.div
