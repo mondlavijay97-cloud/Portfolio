@@ -4,16 +4,26 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import mentorImage from "@/assets/ajay_nomad_bgless.png";
 
+/* ─── pill config: angle on the orbit circle (0° = right, 90° = bottom) ─── */
 const pills = [
-  { icon: Users, text: "80K+ audience built", angle: -60 },
-  { icon: Award, text: "Worked with top brands", angle: 60 },
-  { icon: Shield, text: "Real-world strategies", angle: -120 },
-  { icon: BookOpen, text: "No theory — all execution", angle: 120 },
-] as const;
+  { icon: Users,    text: "80K+ audience built",       slot: "top-left"     as const },
+  { icon: Award,    text: "Worked with top brands",    slot: "top-right"    as const },
+  { icon: Shield,   text: "Real-world strategies",     slot: "bottom-left"  as const },
+  { icon: BookOpen, text: "No theory — all execution", slot: "bottom-right" as const },
+];
 
+/* Strict symmetric positions — all measured from the centre of the orbit area */
+const slotStyles: Record<string, { x: number; y: number; rotate: number; scale: number }> = {
+  "top-left":     { x: -300, y: -140, rotate: -6, scale: 0.92 },
+  "top-right":    { x:  300, y: -140, rotate:  6, scale: 0.92 },
+  "bottom-left":  { x: -300, y:  160, rotate:  4, scale: 1.05 },
+  "bottom-right": { x:  300, y:  160, rotate: -4, scale: 1.05 },
+};
+
+/* ─── Background particles ─── */
 const BackgroundParticles = () => (
   <div className="absolute inset-0 pointer-events-none overflow-hidden">
-    {Array.from({ length: 60 }).map((_, i) => (
+    {Array.from({ length: 50 }).map((_, i) => (
       <motion.div
         key={i}
         className="absolute rounded-full"
@@ -25,10 +35,7 @@ const BackgroundParticles = () => (
           top: `${Math.random() * 100}%`,
           opacity: 0,
         }}
-        animate={{
-          opacity: [0, 0.5, 0],
-          y: [0, -30 - Math.random() * 50],
-        }}
+        animate={{ opacity: [0, 0.45, 0], y: [0, -30 - Math.random() * 40] }}
         transition={{
           duration: 4 + Math.random() * 4,
           repeat: Infinity,
@@ -40,90 +47,67 @@ const BackgroundParticles = () => (
   </div>
 );
 
-const RotatingRings = () => (
-  <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ top: "-5%" }}>
-    {[240, 340, 440, 540].map((size, i) => (
+/* ─── Concentric orbit rings ─── */
+const OrbitRings = () => (
+  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+    {[260, 360, 460].map((size, i) => (
       <motion.div
         key={size}
         className="absolute rounded-full"
         style={{
           width: size,
           height: size,
-          border: `1px solid hsla(var(--primary), ${0.15 - i * 0.03})`,
-          boxShadow: `0 0 ${10 + i * 5}px hsla(var(--primary), ${0.08 - i * 0.015})`,
+          border: `1px solid hsla(var(--primary), ${0.14 - i * 0.03})`,
+          boxShadow: `0 0 ${8 + i * 4}px hsla(var(--primary), ${0.07 - i * 0.015})`,
         }}
-        animate={{
-          rotate: i % 2 === 0 ? [0, 360] : [360, 0],
-          scale: [1, 1.02, 1],
-          opacity: [0.5, 0.8, 0.5],
-        }}
-        transition={{
-          rotate: { duration: 15 + i * 5, repeat: Infinity, ease: "linear" },
-          scale: { duration: 6 + i * 2, repeat: Infinity, ease: "easeInOut" },
-          opacity: { duration: 6 + i * 2, repeat: Infinity, ease: "easeInOut" },
-        }}
+        animate={{ scale: [1, 1.025, 1], opacity: [0.5, 0.85, 0.5] }}
+        transition={{ duration: 7 + i * 2, repeat: Infinity, ease: "easeInOut" }}
       />
     ))}
-    {/* Expanding ripples */}
+    {/* Expanding ripple pulses */}
     {[0, 1, 2].map((i) => (
       <motion.div
-        key={`ripple-${i}`}
+        key={`rp-${i}`}
         className="absolute rounded-full"
-        style={{
-          width: 180,
-          height: 180,
-          border: "1px solid hsla(var(--primary), 0.2)",
-        }}
-        animate={{ scale: [1, 3.5], opacity: [0.3, 0] }}
-        transition={{ duration: 6, repeat: Infinity, delay: i * 2, ease: "easeOut" }}
+        style={{ width: 180, height: 180, border: "1px solid hsla(var(--primary), 0.18)" }}
+        animate={{ scale: [1, 3], opacity: [0.25, 0] }}
+        transition={{ duration: 5.5, repeat: Infinity, delay: i * 1.8, ease: "easeOut" }}
       />
     ))}
   </div>
 );
 
-const ConnectionLine = ({
-  fromAngle,
-  visible,
-}: {
-  fromAngle: number;
-  visible: boolean;
-}) => {
-  const rad = (fromAngle * Math.PI) / 180;
-  const orbitRadius = 260;
-  const startX = 50 + (Math.cos(rad) * orbitRadius * 100) / 700;
-  const startY = 50 + (Math.sin(rad) * orbitRadius * 100) / 600;
-
+/* ─── Hover connection line (pill → centre) ─── */
+const ConnectionLine = ({ x, y, visible }: { x: number; y: number; visible: boolean }) => {
+  // Convert pixel offsets to SVG-friendly percentages (viewBox 800×600)
+  const cx = 400 + x;
+  const cy = 300 + y;
   return (
     <AnimatePresence>
       {visible && (
         <motion.svg
-          className="absolute inset-0 w-full h-full pointer-events-none z-15"
+          viewBox="0 0 800 600"
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          style={{ zIndex: 15 }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
           <defs>
-            <linearGradient id={`line-grad-${fromAngle}`} x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="hsla(var(--primary), 0.5)" />
-              <stop offset="100%" stopColor="hsla(var(--primary), 0)" />
+            <linearGradient id={`lg-${x}-${y}`} x1={cx} y1={cy} x2="400" y2="280" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="rgba(124,58,237,0.45)" />
+              <stop offset="100%" stopColor="rgba(124,58,237,0)" />
             </linearGradient>
-            <filter id={`glow-${fromAngle}`}>
-              <feGaussianBlur stdDeviation="3" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
+            <filter id={`gl-${x}-${y}`}>
+              <feGaussianBlur stdDeviation="3" />
             </filter>
           </defs>
           <line
-            x1={`${startX}%`}
-            y1={`${startY}%`}
-            x2="50%"
-            y2="48%"
-            stroke={`url(#line-grad-${fromAngle})`}
+            x1={cx} y1={cy} x2="400" y2="280"
+            stroke={`url(#lg-${x}-${y})`}
             strokeWidth="1.5"
-            filter={`url(#glow-${fromAngle})`}
+            filter={`url(#gl-${x}-${y})`}
           />
         </motion.svg>
       )}
@@ -131,70 +115,64 @@ const ConnectionLine = ({
   );
 };
 
+/* ─── Single orbital pill ─── */
 const OrbitalPill = ({
   icon: Icon,
   text,
-  angle,
+  slot,
   index,
   hoveredIndex,
   onHover,
 }: {
   icon: typeof Users;
   text: string;
-  angle: number;
+  slot: string;
   index: number;
   hoveredIndex: number | null;
   onHover: (i: number | null) => void;
 }) => {
-  const isTop = angle < 0;
-  const tilt = isTop ? (angle < -90 ? -5 : 5) : angle > 90 ? 5 : -5;
-  const scale = isTop ? 0.94 : 1.04;
+  const s = slotStyles[slot];
   const isHovered = hoveredIndex === index;
   const isFaded = hoveredIndex !== null && hoveredIndex !== index;
-
-  // Position pills in orbital layout
-  const rad = (angle * Math.PI) / 180;
-  const orbitX = Math.cos(rad) * 280;
-  const orbitY = Math.sin(rad) * 220;
 
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
+      transition={{ duration: 0.5, delay: 0.15 + index * 0.12 }}
       className="absolute z-20 hidden lg:block"
       style={{
-        left: `calc(50% + ${orbitX}px)`,
-        top: `calc(48% + ${orbitY}px)`,
-        transform: `translate(-50%, -50%)`,
+        left: "50%",
+        top: "50%",
+        marginLeft: s.x,
+        marginTop: s.y,
+        transform: "translate(-50%, -50%)",
       }}
       onMouseEnter={() => onHover(index)}
       onMouseLeave={() => onHover(null)}
     >
       <motion.div
-        animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 4 + index * 0.8, repeat: Infinity, ease: "easeInOut" }}
+        animate={{ y: [0, -6, 0] }}
+        transition={{ duration: 4.5 + index * 0.7, repeat: Infinity, ease: "easeInOut" }}
       >
         <motion.div
           animate={{
-            scale: isHovered ? 1.08 : isFaded ? 0.97 : scale,
+            scale: isHovered ? 1.08 : isFaded ? s.scale * 0.97 : s.scale,
+            rotate: s.rotate,
             opacity: isFaded ? 0.55 : 1,
-            rotate: tilt,
           }}
-          transition={{ duration: 0.35, ease: "easeOut" }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
           className="flex items-center gap-4 rounded-full px-7 py-4 cursor-default"
           style={{
-            backgroundColor: isHovered ? "rgba(24, 24, 37, 0.8)" : "rgba(24, 24, 37, 0.6)",
+            backgroundColor: isHovered ? "rgba(24,24,37,0.8)" : "rgba(24,24,37,0.6)",
             backdropFilter: isHovered ? "blur(24px)" : "blur(16px)",
             border: isHovered
-              ? "1px solid rgba(124, 58, 237, 0.5)"
-              : "1px solid rgba(124, 58, 237, 0.25)",
+              ? "1px solid rgba(124,58,237,0.5)"
+              : "1px solid rgba(124,58,237,0.25)",
             boxShadow: isHovered
-              ? "0 4px 30px rgba(124, 58, 237, 0.25), 0 0 20px rgba(124, 58, 237, 0.15)"
-              : "0 4px 20px rgba(0, 0, 0, 0.3)",
-            transformStyle: "preserve-3d",
-            perspective: "600px",
+              ? "0 4px 30px rgba(124,58,237,0.25), 0 0 20px rgba(124,58,237,0.15)"
+              : "0 4px 20px rgba(0,0,0,0.3)",
           }}
         >
           <Icon size={24} className="text-primary shrink-0" />
@@ -205,6 +183,7 @@ const OrbitalPill = ({
   );
 };
 
+/* ─── Main section ─── */
 const AuthoritySection = () => {
   const [hoveredPill, setHoveredPill] = useState<number | null>(null);
 
@@ -218,7 +197,7 @@ const AuthoritySection = () => {
             width: 800,
             height: 800,
             borderRadius: "50%",
-            background: "radial-gradient(circle, hsla(var(--primary), 0.14) 0%, transparent 65%)",
+            background: "radial-gradient(circle, hsla(var(--primary),0.14) 0%, transparent 65%)",
             filter: "blur(60px)",
           }}
         />
@@ -226,9 +205,9 @@ const AuthoritySection = () => {
 
       <BackgroundParticles />
 
-      <div className="container relative z-10 max-w-6xl space-y-12">
-        {/* Heading */}
-        <div className="text-center space-y-5">
+      <div className="container relative z-10 max-w-6xl">
+        {/* ── Heading block ── */}
+        <div className="text-center space-y-5 mb-8">
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -238,6 +217,7 @@ const AuthoritySection = () => {
           >
             Your Mentor
           </motion.p>
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -247,13 +227,11 @@ const AuthoritySection = () => {
           >
             Learn From Someone Who's
             <br />
-            <span
-              className="text-gradient"
-              style={{ filter: "drop-shadow(0 0 25px hsla(var(--primary), 0.5))" }}
-            >
+            <span className="text-gradient" style={{ filter: "drop-shadow(0 0 25px hsla(var(--primary),0.5))" }}>
               Done It
             </span>
           </motion.h2>
+
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -264,91 +242,64 @@ const AuthoritySection = () => {
           >
             Built an audience. Worked with brands. Now teaching you the system.
           </motion.p>
-
-          {/* CTA directly below subtext */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <motion.div
-              animate={{
-                boxShadow: [
-                  "0 0 20px rgba(124, 58, 237, 0.3)",
-                  "0 0 35px rgba(124, 58, 237, 0.5)",
-                  "0 0 20px rgba(124, 58, 237, 0.3)",
-                ],
-              }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="inline-block rounded-full"
-            >
-              <Button variant="gradient" size="lg" className="rounded-full" asChild>
-                <a href="#pricing">
-                  Enroll Now <ArrowRight size={18} />
-                </a>
-              </Button>
-            </motion.div>
-          </motion.div>
         </div>
 
-        {/* Central orbital area */}
-        <div className="relative flex justify-center !mt-0" style={{ minHeight: 560 }}>
-          <RotatingRings />
+        {/* ── Orbital area (fixed aspect box) ── */}
+        <div className="relative mx-auto" style={{ maxWidth: 800, aspectRatio: "4/3" }}>
+          <OrbitRings />
 
           {/* Connection lines */}
-          {pills.map((pill, i) => (
-            <ConnectionLine key={`line-${i}`} fromAngle={pill.angle} visible={hoveredPill === i} />
+          {pills.map((p, i) => (
+            <ConnectionLine
+              key={`cl-${i}`}
+              x={slotStyles[p.slot].x}
+              y={slotStyles[p.slot].y}
+              visible={hoveredPill === i}
+            />
           ))}
 
-          {/* Orbital pills */}
-          {pills.map((pill, i) => (
+          {/* Pills */}
+          {pills.map((p, i) => (
             <OrbitalPill
-              key={pill.text}
-              icon={pill.icon}
-              text={pill.text}
-              angle={pill.angle}
+              key={p.text}
+              icon={p.icon}
+              text={p.text}
+              slot={p.slot}
               index={i}
               hoveredIndex={hoveredPill}
               onHover={setHoveredPill}
             />
           ))}
 
-          {/* Creator image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative z-10 flex justify-center"
-          >
-            {/* Glow behind image */}
+          {/* ── Mentor image (dead centre) ── */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            {/* Glow */}
             <div
-              className="absolute bottom-0 left-1/2"
+              className="absolute"
               style={{
-                width: 400,
-                height: 400,
+                width: 420,
+                height: 420,
                 borderRadius: "50%",
-                background:
-                  "radial-gradient(circle, rgba(124, 58, 237, 0.3) 0%, rgba(124, 58, 237, 0.1) 45%, transparent 70%)",
+                background: "radial-gradient(circle, rgba(124,58,237,0.3) 0%, rgba(124,58,237,0.08) 50%, transparent 70%)",
                 filter: "blur(40px)",
-                transform: "translate(-50%, 10%)",
+                transform: "translateY(5%)",
               }}
             />
             <motion.img
               src={mentorImage}
               alt="Ajay Nomad — Your Mentor"
-              className="relative z-10 w-[300px] sm:w-[340px] lg:w-[380px] object-contain"
-              animate={{ scale: [1.05, 1.08, 1.05] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="relative z-10 w-[320px] sm:w-[360px] lg:w-[420px] object-contain"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
               style={{
-                maskImage: "linear-gradient(to bottom, black 70%, transparent 100%)",
-                WebkitMaskImage: "linear-gradient(to bottom, black 70%, transparent 100%)",
-                filter:
-                  "drop-shadow(0 0 50px rgba(124, 58, 237, 0.25)) contrast(1.05)",
+                maskImage: "linear-gradient(to bottom, black 72%, transparent 100%)",
+                WebkitMaskImage: "linear-gradient(to bottom, black 72%, transparent 100%)",
+                filter: "drop-shadow(0 0 50px rgba(124,58,237,0.25)) contrast(1.05)",
               }}
             />
-          </motion.div>
+          </div>
 
           {/* Mobile pills */}
           <div className="lg:hidden absolute bottom-0 left-0 right-0 z-20">
@@ -358,9 +309,9 @@ const AuthoritySection = () => {
                   key={text}
                   className="flex items-center gap-2 rounded-full px-4 py-2.5"
                   style={{
-                    backgroundColor: "rgba(24, 24, 37, 0.6)",
+                    backgroundColor: "rgba(24,24,37,0.6)",
                     backdropFilter: "blur(16px)",
-                    border: "1px solid rgba(124, 58, 237, 0.25)",
+                    border: "1px solid rgba(124,58,237,0.25)",
                   }}
                 >
                   <Icon size={14} className="text-primary shrink-0" />
@@ -370,6 +321,33 @@ const AuthoritySection = () => {
             </div>
           </div>
         </div>
+
+        {/* ── CTA below image ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.35 }}
+          className="text-center mt-6"
+        >
+          <motion.div
+            animate={{
+              boxShadow: [
+                "0 0 20px rgba(124,58,237,0.3)",
+                "0 0 35px rgba(124,58,237,0.5)",
+                "0 0 20px rgba(124,58,237,0.3)",
+              ],
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="inline-block rounded-full"
+          >
+            <Button variant="gradient" size="lg" className="rounded-full" asChild>
+              <a href="#pricing">
+                Enroll Now <ArrowRight size={18} />
+              </a>
+            </Button>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
