@@ -47,7 +47,7 @@ const PricingSection = () => (
             }}
             className={`relative rounded-2xl p-8 sm:p-10 flex flex-col gap-8 transition-all duration-300 ${
               plan.highlighted
-                ? "glass-card border border-primary/40 glow-purple scale-[1.03] sm:scale-105 z-10"
+                ? "glass-card border border-primary/40 glow-purple scale-[1.03] sm:scale-105 z-10 -order-1 sm:order-none"
                 : "glass-card border border-primary/15 hover:border-primary/30"
             }`}
           >
