@@ -34,13 +34,7 @@ const PricingSection = () => (
       </motion.div>
 
       <div className="grid gap-8 sm:grid-cols-2 items-center">
-        {/* Mobile: show highlighted first */}
-        {[...plans].sort((a, b) => {
-          if (typeof window !== "undefined" && window.innerWidth < 640) {
-            return (b.highlighted ? 1 : 0) - (a.highlighted ? 1 : 0);
-          }
-          return 0;
-        }).map((plan, i) => (
+        {plans.map((plan, i) => (
           <motion.div
             key={plan.name}
             initial={{ opacity: 0, y: 30 }}
