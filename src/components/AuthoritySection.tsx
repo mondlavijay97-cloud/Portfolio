@@ -106,21 +106,21 @@ const ConcentricRings = () => (
 
 const BackgroundParticles = () => (
   <div className="absolute inset-0 pointer-events-none overflow-hidden">
-    {Array.from({ length: 20 }).map((_, i) => (
+    {Array.from({ length: 50 }).map((_, i) => (
       <motion.div
         key={i}
         className="absolute rounded-full"
         style={{
-          width: Math.random() * 3 + 1,
-          height: Math.random() * 3 + 1,
+          width: Math.random() * 4 + 2,
+          height: Math.random() * 4 + 2,
           backgroundColor: "hsl(var(--primary))",
           left: `${Math.random() * 100}%`,
           top: `${Math.random() * 100}%`,
           opacity: 0,
         }}
         animate={{
-          opacity: [0, 0.4, 0],
-          y: [0, -30 - Math.random() * 40],
+          opacity: [0, 0.6, 0],
+          y: [0, -40 - Math.random() * 60],
         }}
         transition={{
           duration: 4 + Math.random() * 4,
