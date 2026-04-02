@@ -3,7 +3,7 @@ const links = ["About", "Contact", "Terms", "Privacy"];
 const Footer = () => (
   <footer className="border-t border-border/50 py-10">
     <div className="container flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
-      <span className="font-heading text-lg font-bold">
+      <span className="font-heading text-xl font-bold">
         <span className="text-gradient">Nomad</span> School
       </span>
       <nav className="flex gap-6">
