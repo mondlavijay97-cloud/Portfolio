@@ -81,10 +81,9 @@ const ConcentricRings = () => (
         style={{
           width: 140,
           height: 140,
-          border: "2px solid rgba(124, 58, 237, 0.4)",
-          boxShadow: "0 0 12px rgba(124, 58, 237, 0.15)",
+          border: "1.5px solid rgba(124, 58, 237, 0.35)",
         }}
-        animate={{ scale: [0.3, 2.5], opacity: [0.4, 0] }}
+        animate={{ scale: [0.5, 2.5], opacity: [0, 0.3, 0] }}
         transition={{
           duration: 4,
           repeat: Infinity,
