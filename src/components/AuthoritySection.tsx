@@ -189,7 +189,7 @@ const AuthoritySection = () => (
       </div>
 
       {/* Central image + floating pills */}
-      <div className="relative flex justify-center" style={{ minHeight: 520 }}>
+      <div className="relative flex justify-center !mt-0" style={{ minHeight: 520 }}>
         <ConcentricRings />
 
         {/* Floating pills */}
