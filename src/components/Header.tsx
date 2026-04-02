@@ -15,18 +15,18 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
       <div className="container flex h-16 items-center justify-between">
-        <a href="#" className="font-heading text-xl font-bold tracking-tight">
+        <a href="#" className="font-heading text-2xl font-bold tracking-tight">
           <span className="text-gradient">Nomad</span> School
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((l) => (
-            <a key={l.href} href={l.href} className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            <a key={l.href} href={l.href} className="text-base text-muted-foreground transition-colors hover:text-foreground">
               {l.label}
             </a>
           ))}
-          <Button variant="gradient" size="sm" asChild>
-            <a href="#pricing">Enroll Now <ArrowRight size={16} /></a>
+          <Button variant="gradient" size="default" asChild>
+            <a href="#pricing" className="text-base">Enroll Now <ArrowRight size={18} /></a>
           </Button>
         </nav>
 
