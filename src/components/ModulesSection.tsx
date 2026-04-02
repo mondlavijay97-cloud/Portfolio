@@ -77,17 +77,21 @@ const ModuleCard = ({
 /* Premium 3-layer center hub */
 const CenterHub = () => (
   <div className="relative flex items-center justify-center" style={{ width: 220, height: 220 }}>
-    {/* Expanding ripple waves (matching ProblemSection design) */}
+    {/* Expanding ripple waves — rendered via box-shadow to avoid overflow clipping */}
     {[0, 1, 2, 3].map((i) => (
       <motion.div
         key={`ripple-${i}`}
         className="absolute rounded-full pointer-events-none"
         style={{
-          width: 100 + i * 50,
-          height: 100 + i * 50,
-          border: "1px solid hsla(var(--primary), 0.12)",
+          width: 96,
+          height: 96,
+          border: "1.5px solid hsla(var(--primary), 0.35)",
+          boxShadow: "0 0 8px hsla(var(--primary), 0.15)",
         }}
-        animate={{ scale: [1, 1.6], opacity: [0.3, 0] }}
+        animate={{
+          scale: [1, 3.5],
+          opacity: [0.5, 0],
+        }}
         transition={{
           duration: 4,
           repeat: Infinity,
