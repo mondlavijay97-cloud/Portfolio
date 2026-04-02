@@ -144,7 +144,7 @@ const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => (
     </defs>
     {/* Top-left: card right edge → bend → circle left */}
     <motion.path
-      d="M 255 175 L 320 175 L 320 310 L 380 310"
+      d="M 226 137 L 296 137 L 296 315 L 365 315"
       stroke={`hsl(var(--primary) / ${hoveredIndex === 0 ? "0.6" : "0.2"})`}
       strokeWidth={hoveredIndex === 0 ? 2 : 1}
       filter="url(#line-glow)"
@@ -155,7 +155,7 @@ const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => (
     />
     {/* Top-right: circle right → bend → card left edge */}
     <motion.path
-      d="M 620 310 L 680 310 L 680 175 L 745 175"
+      d="M 635 315 L 704 315 L 704 137 L 774 137"
       stroke={`hsl(var(--primary) / ${hoveredIndex === 1 ? "0.6" : "0.2"})`}
       strokeWidth={hoveredIndex === 1 ? 2 : 1}
       filter="url(#line-glow)"
@@ -166,7 +166,7 @@ const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => (
     />
     {/* Bottom-left: card right edge → bend → circle left */}
     <motion.path
-      d="M 255 500 L 320 500 L 320 390 L 380 390"
+      d="M 226 584 L 296 584 L 296 385 L 365 385"
       stroke={`hsl(var(--primary) / ${hoveredIndex === 2 ? "0.6" : "0.2"})`}
       strokeWidth={hoveredIndex === 2 ? 2 : 1}
       filter="url(#line-glow)"
@@ -177,7 +177,7 @@ const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => (
     />
     {/* Bottom-right: circle right → bend → card left edge */}
     <motion.path
-      d="M 620 390 L 680 390 L 680 500 L 745 500"
+      d="M 635 385 L 704 385 L 704 584 L 774 584"
       stroke={`hsl(var(--primary) / ${hoveredIndex === 3 ? "0.6" : "0.2"})`}
       strokeWidth={hoveredIndex === 3 ? 2 : 1}
       filter="url(#line-glow)"
