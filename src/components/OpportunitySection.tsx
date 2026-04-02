@@ -273,7 +273,6 @@ const OpportunitySection = () => {
             {outcomes.map(({ icon: Icon, text, id }) => {
               const isHovered = hovered === id;
               const isDimmed = hovered !== null && hovered !== id;
-              const isGlowing = glowingCards.has(id);
               return (
                 <motion.div
                   key={text}
@@ -294,23 +293,28 @@ const OpportunitySection = () => {
                   onMouseEnter={() => setHovered(id)}
                   onMouseLeave={() => setHovered(null)}
                 >
-                  <div
-                    className="flex items-center gap-3 rounded-xl px-5 py-4 transition-all duration-200"
-                    style={{
-                      background: "hsl(var(--surface))",
-                      border: `1px solid ${
-                        isHovered
-                          ? "hsl(var(--primary) / 0.6)"
-                          : isGlowing
-                          ? "hsl(var(--primary) / 0.45)"
-                          : "hsl(var(--primary) / 0.12)"
-                      }`,
+                  <motion.div
+                    className="flex items-center gap-3 rounded-xl px-5 py-4"
+                    style={{ background: "hsl(var(--surface))" }}
+                    animate={{
+                      borderColor: isHovered
+                        ? "hsl(var(--primary) / 0.6)"
+                        : ["hsl(var(--primary) / 0.1)", "hsl(var(--primary) / 0.3)", "hsl(var(--primary) / 0.1)"],
                       boxShadow: isHovered
                         ? "0 8px 30px hsl(var(--primary) / 0.15), 0 0 20px hsl(var(--primary) / 0.08)"
-                        : isGlowing
-                        ? "0 0 12px hsl(var(--primary) / 0.2), 0 0 4px hsl(var(--primary) / 0.15)"
-                        : "0 2px 8px hsl(0 0% 0% / 0.2)",
+                        : [
+                            "0 0 4px hsl(var(--primary) / 0.05)",
+                            "0 0 10px hsl(var(--primary) / 0.12)",
+                            "0 0 4px hsl(var(--primary) / 0.05)",
+                          ],
                     }}
+                    transition={{
+                      duration: 3.5 + id * 0.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                    // @ts-ignore – border shorthand for framer
+                    css={{ border: "1px solid" }}
                   >
                     <div
                       className="flex items-center justify-center w-9 h-9 rounded-lg shrink-0"
