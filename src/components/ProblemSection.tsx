@@ -111,7 +111,7 @@ const ClarityHub = () => (
           Content is not hard.
         </motion.p>
         <motion.p
-          className="text-lg md:text-xl font-bold font-heading text-gradient"
+          className="text-xl md:text-2xl font-bold font-heading text-gradient"
           style={{ filter: "drop-shadow(0 0 16px hsl(var(--primary) / 0.6))" }}
           initial={{ opacity: 0, y: 6 }}
           whileInView={{ opacity: 1, y: 0 }}
