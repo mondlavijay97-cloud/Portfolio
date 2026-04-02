@@ -323,7 +323,7 @@ const OpportunitySection = () => {
                       <Icon size={18} className="text-primary" />
                     </div>
                     <span className="text-sm font-medium text-foreground whitespace-nowrap">{text}</span>
-                  </div>
+                  </motion.div>
                 </motion.div>
               );
             })}
