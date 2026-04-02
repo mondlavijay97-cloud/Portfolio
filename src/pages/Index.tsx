@@ -25,7 +25,7 @@ const Index = () => (
       <ModulesSection />
       <AuthoritySection />
       <BonusesSection />
-      <SyllabusDownload />
+      
       <PricingSection />
       <ObjectionSection />
       <TransformationSection />
