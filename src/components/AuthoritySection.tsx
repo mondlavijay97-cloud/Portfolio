@@ -43,7 +43,7 @@ const FloatingPill = ({
         <motion.div
           whileHover={{ y: -4, scale: 1.03 }}
           transition={{ duration: 0.3 }}
-          className="group flex items-center gap-3 rounded-full px-5 py-3 cursor-default transition-all duration-300"
+          className="group flex items-center gap-4 rounded-full px-7 py-4 cursor-default transition-all duration-300"
           style={{
             backgroundColor: "rgba(24, 24, 37, 0.6)",
             backdropFilter: "blur(16px)",
