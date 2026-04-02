@@ -54,24 +54,53 @@ const ConnectionPaths = ({ hoveredCard }: { hoveredCard: number | null }) => {
       fill="none"
     >
       {paths.map((d, i) => (
-        <motion.path
-          key={i}
-          d={d}
-          stroke="url(#pathGrad)"
-          strokeWidth={1.2}
-          vectorEffect="non-scaling-stroke"
-          animate={{
-            opacity: hoveredCard === null ? 0.5 : hoveredCard === i ? 0.9 : 0.15,
-            strokeWidth: hoveredCard === i ? 2 : 1.2,
-          }}
-          transition={{ duration: 0.4 }}
-        />
+        <g key={i}>
+          <motion.path
+            d={d}
+            stroke="url(#pathGrad)"
+            strokeWidth={1.2}
+            vectorEffect="non-scaling-stroke"
+            fill="none"
+            animate={{
+              opacity: hoveredCard === null ? 0.5 : hoveredCard === i ? 0.9 : 0.15,
+              strokeWidth: hoveredCard === i ? 2 : 1.2,
+            }}
+            transition={{ duration: 0.4 }}
+          />
+          {/* Moving particles along this path */}
+          {[0, 1, 2].map((p) => (
+            <motion.circle
+              key={p}
+              r={1.2}
+              fill="hsl(var(--primary))"
+              filter="url(#particleGlow)"
+              animate={{
+                opacity: hoveredCard === null ? [0.4, 0.8, 0.4] : hoveredCard === i ? [0.6, 1, 0.6] : [0.1, 0.2, 0.1],
+              }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <animateMotion
+                dur={`${hoveredCard === i ? 1.8 : 2.8 + p * 0.3}s`}
+                repeatCount="indefinite"
+                begin={`${p * 0.9}s`}
+                path={d}
+              />
+            </motion.circle>
+          ))}
+        </g>
       ))}
       <defs>
         <linearGradient id="pathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8" />
           <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.2" />
         </linearGradient>
+        <filter id="particleGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="1.5" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
       </defs>
     </svg>
   );
