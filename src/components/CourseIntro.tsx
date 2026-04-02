@@ -42,51 +42,50 @@ const StepCard = ({ step, index }: { step: typeof steps[0]; index: number }) => 
     viewport={{ once: true, margin: "-60px" }}
     transition={{ duration: 0.5, delay: 0.1 + index * 0.1 }}
     whileHover={{ y: -6, scale: 1.02 }}
-    className="group relative rounded-xl overflow-hidden border transition-all duration-400"
+    className="group relative overflow-hidden border transition-all duration-500"
     style={{
       backgroundColor: "#181825",
       borderColor: "rgba(124, 58, 237, 0.2)",
+      borderRadius: "11px",
       boxShadow: "0 4px 24px rgba(0,0,0,0.3)",
     }}
   >
     {/* Hover border glow */}
-    <div className="absolute inset-0 rounded-xl border border-primary/0 group-hover:border-primary/40 transition-all duration-500 pointer-events-none z-20" />
-    <div className="absolute inset-0 rounded-xl group-hover:shadow-[0_8px_40px_rgba(124,58,237,0.15)] transition-all duration-500 pointer-events-none z-20" />
+    <div className="absolute inset-0 border border-primary/0 group-hover:border-primary/30 transition-all duration-500 pointer-events-none z-20" style={{ borderRadius: "11px" }} />
+    <div className="absolute inset-0 group-hover:shadow-[0_8px_32px_rgba(124,58,237,0.12)] transition-all duration-500 pointer-events-none z-20" style={{ borderRadius: "11px" }} />
 
     <div className="relative p-6 space-y-4">
-      {/* Large step number */}
-      <span
-        className="absolute top-4 left-5 text-[64px] font-bold font-heading leading-none select-none pointer-events-none"
-        style={{ color: "rgba(255,255,255,0.06)" }}
-      >
-        {step.num}
-      </span>
-
-      {/* Title — pushed below the number */}
-      <div className="pt-12">
-        <h3 className="text-2xl font-bold font-heading text-white">{step.title}</h3>
+      {/* Step number + Title inline */}
+      <div className="flex items-baseline gap-3">
+        <span
+          className="text-lg font-medium font-heading select-none shrink-0"
+          style={{ color: "rgba(255,255,255,0.22)" }}
+        >
+          {step.num}
+        </span>
+        <h3 className="text-[22px] font-bold font-heading text-white group-hover:text-white/95 transition-colors duration-300">
+          {step.title}
+        </h3>
       </div>
 
       {/* Image */}
-      <div className="relative rounded-lg overflow-hidden">
+      <div className="relative overflow-hidden" style={{ borderRadius: "8px" }}>
         <motion.img
           src={step.image}
           alt={`${step.title} — ${step.description}`}
           loading="lazy"
           width={640}
           height={400}
-          className="w-full h-40 object-cover rounded-lg group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-500"
+          style={{ borderRadius: "8px" }}
         />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#181825]/60 via-transparent to-transparent pointer-events-none rounded-lg" />
-        {/* Inner shadow */}
-        <div className="absolute inset-0 shadow-[inset_0_2px_12px_rgba(0,0,0,0.3)] pointer-events-none rounded-lg" />
-        {/* Hover glow */}
-        <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/[0.06] transition-colors duration-500 pointer-events-none rounded-lg" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#181825]/50 via-transparent to-transparent pointer-events-none" style={{ borderRadius: "8px" }} />
+        <div className="absolute inset-0 shadow-[inset_0_2px_10px_rgba(0,0,0,0.25)] pointer-events-none" style={{ borderRadius: "8px" }} />
+        <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/[0.05] transition-colors duration-500 pointer-events-none" style={{ borderRadius: "8px" }} />
       </div>
 
       {/* Description */}
-      <p className="text-[15px] leading-relaxed" style={{ color: "#C4C4CC" }}>
+      <p className="text-[15px]" style={{ color: "#B8B8C0", lineHeight: 1.65 }}>
         {step.description}
       </p>
     </div>
