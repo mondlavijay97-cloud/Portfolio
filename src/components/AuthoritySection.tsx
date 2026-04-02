@@ -72,33 +72,35 @@ const FloatingPill = ({
 };
 
 const ConcentricRings = () => (
-  <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ top: "-5%" }}>
-    {[280, 380, 480].map((size, i) => (
+  <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ top: "-15%" }}>
+    {/* Expanding circular waves behind the head */}
+    {[0, 1, 2, 3, 4].map((i) => (
+      <motion.div
+        key={`wave-${i}`}
+        className="absolute rounded-full"
+        style={{
+          width: 120,
+          height: 120,
+          border: "2px solid hsla(var(--primary), 0.35)",
+          boxShadow: "0 0 8px hsla(var(--primary), 0.1)",
+        }}
+        animate={{ scale: [0.5, 4], opacity: [0.5, 0] }}
+        transition={{ duration: 4, repeat: Infinity, delay: i * 0.8, ease: "easeOut" }}
+      />
+    ))}
+    {/* Static concentric rings */}
+    {[180, 280, 380].map((size, i) => (
       <motion.div
         key={size}
         className="absolute rounded-full"
         style={{
           width: size,
           height: size,
-          border: `1px solid hsla(var(--primary), ${0.12 - i * 0.03})`,
-          boxShadow: `0 0 ${8 + i * 4}px hsla(var(--primary), ${0.06 - i * 0.015})`,
+          border: `1px solid hsla(var(--primary), ${0.1 - i * 0.025})`,
+          boxShadow: `0 0 ${6 + i * 4}px hsla(var(--primary), ${0.05 - i * 0.012})`,
         }}
-        animate={{ scale: [1, 1.03, 1], opacity: [0.6, 1, 0.6] }}
+        animate={{ scale: [1, 1.03, 1], opacity: [0.5, 0.8, 0.5] }}
         transition={{ duration: 6 + i * 2, repeat: Infinity, ease: "easeInOut" }}
-      />
-    ))}
-    {/* Expanding ripple waves */}
-    {[0, 1, 2].map((i) => (
-      <motion.div
-        key={`ripple-${i}`}
-        className="absolute rounded-full"
-        style={{
-          width: 200,
-          height: 200,
-          border: "1px solid hsla(var(--primary), 0.2)",
-        }}
-        animate={{ scale: [1, 3], opacity: [0.3, 0] }}
-        transition={{ duration: 5, repeat: Infinity, delay: i * 1.7, ease: "easeOut" }}
       />
     ))}
   </div>
