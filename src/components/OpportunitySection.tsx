@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { TrendingUp, Briefcase, UserCheck, DollarSign } from "lucide-react";
 
@@ -106,8 +106,46 @@ const ConnectionPaths = ({ hoveredCard }: { hoveredCard: number | null }) => {
   );
 };
 
+const PARTICLE_DURATION = 2.8; // seconds per particle loop
+const PARTICLE_OFFSETS = [0, 0.9, 1.8]; // 3 particles per path
+
 const OpportunitySection = () => {
   const [hovered, setHovered] = useState<number | null>(null);
+  const [glowingCards, setGlowingCards] = useState<Set<number>>(new Set());
+
+  // Pulse card borders when particles arrive
+  useEffect(() => {
+    const intervals: NodeJS.Timer[] = [];
+    for (let cardIdx = 0; cardIdx < 4; cardIdx++) {
+      for (const offset of PARTICLE_OFFSETS) {
+        const startDelay = (offset + 0.1) * 1000; // slight offset for arrival
+        const timeout = setTimeout(() => {
+          const interval = setInterval(() => {
+            setGlowingCards((prev) => new Set(prev).add(cardIdx));
+            setTimeout(() => {
+              setGlowingCards((prev) => {
+                const next = new Set(prev);
+                next.delete(cardIdx);
+                return next;
+              });
+            }, 400);
+          }, PARTICLE_DURATION * 1000);
+          intervals.push(interval);
+          // Trigger immediately too
+          setGlowingCards((prev) => new Set(prev).add(cardIdx));
+          setTimeout(() => {
+            setGlowingCards((prev) => {
+              const next = new Set(prev);
+              next.delete(cardIdx);
+              return next;
+            });
+          }, 400);
+        }, startDelay);
+        intervals.push(timeout as any);
+      }
+    }
+    return () => intervals.forEach((id) => clearInterval(id as any));
+  }, []);
 
   return (
     <section className="relative py-28 overflow-hidden bg-background">
@@ -273,6 +311,7 @@ const OpportunitySection = () => {
             {outcomes.map(({ icon: Icon, text, id }) => {
               const isHovered = hovered === id;
               const isDimmed = hovered !== null && hovered !== id;
+              const isGlowing = glowingCards.has(id);
               return (
                 <motion.div
                   key={text}
@@ -294,12 +333,20 @@ const OpportunitySection = () => {
                   onMouseLeave={() => setHovered(null)}
                 >
                   <div
-                    className="flex items-center gap-3 rounded-xl px-5 py-4 transition-all duration-300"
+                    className="flex items-center gap-3 rounded-xl px-5 py-4 transition-all duration-200"
                     style={{
                       background: "hsl(var(--surface))",
-                      border: `1px solid ${isHovered ? "hsl(var(--primary) / 0.5)" : "hsl(var(--primary) / 0.12)"}`,
+                      border: `1px solid ${
+                        isHovered
+                          ? "hsl(var(--primary) / 0.6)"
+                          : isGlowing
+                          ? "hsl(var(--primary) / 0.45)"
+                          : "hsl(var(--primary) / 0.12)"
+                      }`,
                       boxShadow: isHovered
                         ? "0 8px 30px hsl(var(--primary) / 0.15), 0 0 20px hsl(var(--primary) / 0.08)"
+                        : isGlowing
+                        ? "0 0 12px hsl(var(--primary) / 0.2), 0 0 4px hsl(var(--primary) / 0.15)"
                         : "0 2px 8px hsl(0 0% 0% / 0.2)",
                     }}
                   >
