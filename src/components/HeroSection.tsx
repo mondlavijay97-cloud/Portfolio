@@ -1,6 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Play, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-creator.jpg";
+import avatar1 from "@/assets/avatar-1.jpg";
+import avatar2 from "@/assets/avatar-2.jpg";
+import avatar3 from "@/assets/avatar-3.jpg";
+import avatar4 from "@/assets/avatar-4.jpg";
+import avatar5 from "@/assets/avatar-5.jpg";
+
+const avatars = [avatar1, avatar2, avatar3, avatar4, avatar5];
 
 const HeroSection = () => (
   <section className="relative min-h-screen flex items-center overflow-hidden pt-16 pb-8">
@@ -19,6 +27,35 @@ const HeroSection = () => (
         <p className="text-xl text-muted-foreground max-w-lg">
           From zero → to creating, growing & monetizing content using AI
         </p>
+
+        {/* Social proof */}
+        <div className="flex items-center gap-3">
+          <div className="flex -space-x-2">
+            {avatars.map((src, i) => (
+              <motion.img
+                key={i}
+                src={src}
+                alt="Creator"
+                width={32}
+                height={32}
+                initial={{ opacity: 0, scale: 0.6 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4 + i * 0.1, duration: 0.35 }}
+                className="w-8 h-8 sm:w-8 sm:h-8 rounded-full border-2 border-background object-cover shadow-md hover:scale-110 hover:shadow-primary/30 transition-transform duration-200 relative"
+                style={{ zIndex: avatars.length - i }}
+              />
+            ))}
+          </div>
+          <motion.p
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.9, duration: 0.4 }}
+            className="text-sm text-muted-foreground"
+          >
+            Trusted by <span className="text-primary-bright font-semibold">1000+ creators</span> building content with AI
+          </motion.p>
+        </div>
+
         <p className="text-sm text-muted-foreground/70">
           Built by a creator with <span className="text-primary-bright font-semibold">80K+ audience</span> & brand collaborations
         </p>
