@@ -252,7 +252,7 @@ const ConfusionCard = ({
                 }}
               />
             </div>
-            <span className="text-sm font-medium text-foreground/80">{item.title}</span>
+            <span className="text-base font-medium text-foreground/80">{item.title}</span>
           </div>
         </div>
       </motion.div>
