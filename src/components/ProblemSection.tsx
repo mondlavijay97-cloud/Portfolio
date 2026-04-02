@@ -280,7 +280,7 @@ const ProblemSection = () => {
           transition={{ duration: 0.6 }}
         >
           <motion.span
-            className="inline-block text-xs uppercase tracking-[0.2em] mb-4"
+            className="inline-block text-sm md:text-base uppercase tracking-[0.2em] mb-4 font-semibold"
             style={{ color: "hsl(var(--primary) / 0.7)" }}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
