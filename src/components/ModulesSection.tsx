@@ -101,32 +101,6 @@ const CenterHub = () => (
       />
     ))}
 
-    {/* Static concentric rings */}
-    <div
-      className="absolute rounded-full pointer-events-none"
-      style={{
-        width: 200,
-        height: 200,
-        border: "1px solid hsla(var(--primary), 0.08)",
-      }}
-    />
-    <div
-      className="absolute rounded-full pointer-events-none"
-      style={{
-        width: 170,
-        height: 170,
-        border: "1px solid hsla(var(--primary), 0.15)",
-      }}
-    />
-    <div
-      className="absolute rounded-full pointer-events-none"
-      style={{
-        width: 140,
-        height: 140,
-        border: "1px solid hsla(var(--primary), 0.22)",
-      }}
-    />
-
     {/* Ripple waves — matching Authority section */}
     {[0, 1, 2, 3].map((i) => (
       <motion.div
@@ -146,18 +120,6 @@ const CenterHub = () => (
         }}
       />
     ))}
-
-    {/* Outer glow ring */}
-    <motion.div
-      className="absolute rounded-full pointer-events-none"
-      style={{
-        width: 220,
-        height: 220,
-        background: "radial-gradient(circle, hsla(var(--primary), 0.15) 0%, transparent 70%)",
-      }}
-      animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.8, 0.5] }}
-      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-    />
 
     {/* Inner core */}
     <motion.div
