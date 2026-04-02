@@ -142,9 +142,9 @@ const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => (
         </feMerge>
       </filter>
     </defs>
-    {/* Top-left: card center → right → down → hub */}
+    {/* Top-left: card right edge → bend → circle left */}
     <motion.path
-      d="M 230 200 L 420 200 L 420 310 L 460 310"
+      d="M 255 175 L 320 175 L 320 310 L 380 310"
       stroke={`hsl(var(--primary) / ${hoveredIndex === 0 ? "0.6" : "0.2"})`}
       strokeWidth={hoveredIndex === 0 ? 2 : 1}
       filter="url(#line-glow)"
@@ -153,9 +153,9 @@ const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => (
       viewport={{ once: true }}
       transition={{ duration: 1.2, delay: 0.3, ease: "easeInOut" }}
     />
-    {/* Top-right: hub → right → up → card */}
+    {/* Top-right: circle right → bend → card left edge */}
     <motion.path
-      d="M 540 310 L 580 310 L 580 200 L 770 200"
+      d="M 620 310 L 680 310 L 680 175 L 745 175"
       stroke={`hsl(var(--primary) / ${hoveredIndex === 1 ? "0.6" : "0.2"})`}
       strokeWidth={hoveredIndex === 1 ? 2 : 1}
       filter="url(#line-glow)"
@@ -164,9 +164,9 @@ const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => (
       viewport={{ once: true }}
       transition={{ duration: 1.2, delay: 0.5, ease: "easeInOut" }}
     />
-    {/* Bottom-left: card → right → up → hub */}
+    {/* Bottom-left: card right edge → bend → circle left */}
     <motion.path
-      d="M 230 480 L 420 480 L 420 380 L 460 380"
+      d="M 255 500 L 320 500 L 320 390 L 380 390"
       stroke={`hsl(var(--primary) / ${hoveredIndex === 2 ? "0.6" : "0.2"})`}
       strokeWidth={hoveredIndex === 2 ? 2 : 1}
       filter="url(#line-glow)"
@@ -175,9 +175,9 @@ const ConnectionLines = ({ hoveredIndex }: { hoveredIndex: number | null }) => (
       viewport={{ once: true }}
       transition={{ duration: 1.2, delay: 0.7, ease: "easeInOut" }}
     />
-    {/* Bottom-right: hub → right → down → card */}
+    {/* Bottom-right: circle right → bend → card left edge */}
     <motion.path
-      d="M 540 380 L 580 380 L 580 480 L 770 480"
+      d="M 620 390 L 680 390 L 680 500 L 745 500"
       stroke={`hsl(var(--primary) / ${hoveredIndex === 3 ? "0.6" : "0.2"})`}
       strokeWidth={hoveredIndex === 3 ? 2 : 1}
       filter="url(#line-glow)"
