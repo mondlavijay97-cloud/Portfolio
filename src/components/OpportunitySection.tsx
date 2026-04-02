@@ -58,11 +58,11 @@ const ConnectionPaths = ({ hoveredCard }: { hoveredCard: number | null }) => {
           key={i}
           d={d}
           stroke="url(#pathGrad)"
-          strokeWidth={0.4}
+          strokeWidth={1.2}
           vectorEffect="non-scaling-stroke"
           animate={{
-            opacity: hoveredCard === null ? 0.15 : hoveredCard === i ? 0.6 : 0.05,
-            strokeWidth: hoveredCard === i ? 0.7 : 0.4,
+            opacity: hoveredCard === null ? 0.5 : hoveredCard === i ? 0.9 : 0.15,
+            strokeWidth: hoveredCard === i ? 2 : 1.2,
           }}
           transition={{ duration: 0.4 }}
         />
