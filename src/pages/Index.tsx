@@ -6,7 +6,7 @@ import CourseIntro from "@/components/CourseIntro";
 import ModulesSection from "@/components/ModulesSection";
 import AuthoritySection from "@/components/AuthoritySection";
 import BonusesSection from "@/components/BonusesSection";
-import SyllabusDownload from "@/components/SyllabusDownload";
+
 import PricingSection from "@/components/PricingSection";
 import ObjectionSection from "@/components/ObjectionSection";
 import TransformationSection from "@/components/TransformationSection";
