@@ -73,22 +73,26 @@ const FloatingPill = ({
 
 const ConcentricRings = () => (
   <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ top: "-15%" }}>
-    {/* Expanding circular waves behind the head */}
-    {[0, 1, 2, 3, 4].map((i) => (
+    {/* Ripple waves — water-like expanding circles */}
+    {[0, 1, 2, 3].map((i) => (
       <motion.div
-        key={`wave-${i}`}
+        key={`ripple-${i}`}
         className="absolute rounded-full"
         style={{
-          width: 120,
-          height: 120,
-          border: "2px solid hsla(var(--primary), 0.35)",
-          boxShadow: "0 0 8px hsla(var(--primary), 0.1)",
+          width: 140,
+          height: 140,
+          border: "1.5px solid rgba(124, 58, 237, 0.18)",
         }}
-        animate={{ scale: [0.5, 4], opacity: [0.5, 0] }}
-        transition={{ duration: 4, repeat: Infinity, delay: i * 0.8, ease: "easeOut" }}
+        animate={{ scale: [0.3, 3], opacity: [0.2, 0] }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          delay: i * 1,
+          ease: "easeOut",
+        }}
       />
     ))}
-    {/* Static concentric rings */}
+    {/* Static concentric rings for structure */}
     {[180, 280, 380].map((size, i) => (
       <motion.div
         key={size}
@@ -96,10 +100,9 @@ const ConcentricRings = () => (
         style={{
           width: size,
           height: size,
-          border: `1px solid hsla(var(--primary), ${0.1 - i * 0.025})`,
-          boxShadow: `0 0 ${6 + i * 4}px hsla(var(--primary), ${0.05 - i * 0.012})`,
+          border: `1px solid rgba(124, 58, 237, ${0.08 - i * 0.02})`,
         }}
-        animate={{ scale: [1, 1.03, 1], opacity: [0.5, 0.8, 0.5] }}
+        animate={{ scale: [1, 1.03, 1], opacity: [0.4, 0.7, 0.4] }}
         transition={{ duration: 6 + i * 2, repeat: Infinity, ease: "easeInOut" }}
       />
     ))}
