@@ -144,11 +144,16 @@ const CenterHub = () => (
       className="relative z-10 w-24 h-24 rounded-full flex items-center justify-center"
       style={{
         backgroundColor: "hsl(var(--card))",
-        border: "2px solid hsla(var(--primary), 0.5)",
+        border: "2.5px solid hsla(var(--primary), 0.7)",
         boxShadow: "0 0 50px hsla(var(--primary), 0.3), 0 0 100px hsla(var(--primary), 0.15), inset 0 0 30px hsla(var(--primary), 0.1)",
       }}
       animate={{
         scale: [1, 1.05, 1],
+        borderColor: [
+          "hsla(var(--primary), 0.7)",
+          "hsla(var(--primary), 1)",
+          "hsla(var(--primary), 0.7)",
+        ],
         boxShadow: [
           "0 0 50px hsla(var(--primary), 0.3), 0 0 100px hsla(var(--primary), 0.15), inset 0 0 30px hsla(var(--primary), 0.1)",
           "0 0 70px hsla(var(--primary), 0.5), 0 0 120px hsla(var(--primary), 0.25), inset 0 0 40px hsla(var(--primary), 0.15)",
