@@ -102,7 +102,7 @@ const ClarityHub = () => (
     >
       <div className="text-center px-6 space-y-2">
         <motion.p
-          className="text-sm md:text-base text-muted-foreground"
+          className="text-base md:text-lg text-muted-foreground"
           initial={{ opacity: 0, y: 6 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
