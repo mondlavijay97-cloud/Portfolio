@@ -265,7 +265,7 @@ const ProblemSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="relative py-24 md:py-32 overflow-hidden" style={{ background: "hsl(var(--background))" }}>
+    <section className="relative pt-24 md:pt-32 pb-0 overflow-hidden" style={{ background: "hsl(var(--background))" }}>
       <Particles />
 
       {/* Radial glow behind center */}
