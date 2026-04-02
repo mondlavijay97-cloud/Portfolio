@@ -82,6 +82,41 @@ const OpportunitySection = () => {
 
   return (
     <section className="relative py-28 overflow-hidden bg-background">
+      {/* Noise texture overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.035]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundSize: "128px 128px",
+        }}
+      />
+      {/* Floating micro particles */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              width: i % 3 === 0 ? 2 : 1.5,
+              height: i % 3 === 0 ? 2 : 1.5,
+              background: "hsl(var(--primary) / 0.3)",
+              boxShadow: "0 0 4px hsl(var(--primary) / 0.2)",
+              left: `${8 + (i * 7.5) % 85}%`,
+              top: `${10 + ((i * 13) % 80)}%`,
+            }}
+            animate={{
+              y: [0, -15, 0],
+              opacity: [0.2, 0.5, 0.2],
+            }}
+            transition={{
+              duration: 4 + (i % 3) * 1.5,
+              repeat: Infinity,
+              delay: i * 0.6,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </div>
       {/* Radial glow behind engine */}
       <div
         className="absolute top-1/2 left-[15%] -translate-y-1/2 w-[500px] h-[500px] pointer-events-none"
