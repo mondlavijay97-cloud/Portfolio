@@ -28,7 +28,7 @@ const Index = () => (
       
       <PricingSection />
       <ObjectionSection />
-      <TransformationSection />
+      
       <FinalCTA />
     </main>
     <Footer />
