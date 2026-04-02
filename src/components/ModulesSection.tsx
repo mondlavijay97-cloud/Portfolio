@@ -324,7 +324,7 @@ const ModulesSection = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section id="modules" className="relative py-24 overflow-hidden" style={{ backgroundColor: "#0B0B0F" }}>
+    <section id="modules" className="relative py-24 overflow-x-hidden" style={{ backgroundColor: "#0B0B0F" }}>
       {/* Radial glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-primary/[0.12] blur-[140px]" />
