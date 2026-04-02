@@ -93,21 +93,6 @@ const ConcentricRings = () => (
         }}
       />
     ))}
-    {/* Static concentric rings for structure */}
-    {[180, 280, 380].map((size, i) => (
-      <motion.div
-        key={size}
-        className="absolute rounded-full"
-        style={{
-          width: size,
-          height: size,
-          border: `1.5px solid rgba(124, 58, 237, ${0.2 - i * 0.04})`,
-          boxShadow: `0 0 ${8 + i * 4}px rgba(124, 58, 237, ${0.08 - i * 0.02})`,
-        }}
-        animate={{ scale: [1, 1.03, 1], opacity: [0.6, 0.9, 0.6] }}
-        transition={{ duration: 6 + i * 2, repeat: Infinity, ease: "easeInOut" }}
-      />
-    ))}
   </div>
 );
 
