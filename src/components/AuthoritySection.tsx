@@ -227,8 +227,8 @@ const AuthoritySection = () => (
             alt="Ajay Nomad — Your Mentor"
             className="relative z-10 w-[280px] sm:w-[320px] lg:w-[360px] object-contain"
             style={{
-              maskImage: "linear-gradient(to bottom, black 70%, transparent 100%)",
-              WebkitMaskImage: "linear-gradient(to bottom, black 70%, transparent 100%)",
+              maskImage: "linear-gradient(to bottom, black 60%, transparent 95%)",
+              WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 95%)",
               filter: "drop-shadow(0 0 40px rgba(124, 58, 237, 0.2))",
             }}
           />
