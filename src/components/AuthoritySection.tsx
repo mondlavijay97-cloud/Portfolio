@@ -11,10 +11,10 @@ const pills = [
 ] as const;
 
 const pillPositions = {
-  "top-left": { desktop: "top-[12%] left-[2%]", delay: 0 },
-  "top-right": { desktop: "top-[12%] right-[2%]", delay: 0.8 },
-  "bottom-left": { desktop: "bottom-[22%] left-[2%]", delay: 1.6 },
-  "bottom-right": { desktop: "bottom-[22%] right-[2%]", delay: 2.4 },
+  "top-left": { desktop: "top-[20%] left-[8%]", delay: 0 },
+  "top-right": { desktop: "top-[20%] right-[8%]", delay: 0.8 },
+  "bottom-left": { desktop: "bottom-[30%] left-[8%]", delay: 1.6 },
+  "bottom-right": { desktop: "bottom-[30%] right-[8%]", delay: 2.4 },
 };
 
 const FloatingPill = ({
@@ -170,7 +170,8 @@ const AuthoritySection = () => (
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-4xl sm:text-5xl lg:text-6xl font-bold font-heading"
         >
-          Learn From Someone Who's{" "}
+          Learn From Someone Who's
+          <br />
           <span className="text-gradient" style={{ filter: "drop-shadow(0 0 20px hsla(var(--primary), 0.4))" }}>
             Done It
           </span>
