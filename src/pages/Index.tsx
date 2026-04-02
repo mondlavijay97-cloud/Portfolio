@@ -9,7 +9,7 @@ import BonusesSection from "@/components/BonusesSection";
 
 import PricingSection from "@/components/PricingSection";
 import ObjectionSection from "@/components/ObjectionSection";
-import TransformationSection from "@/components/TransformationSection";
+
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import MobileCTA from "@/components/MobileCTA";
@@ -28,7 +28,7 @@ const Index = () => (
       
       <PricingSection />
       <ObjectionSection />
-      <TransformationSection />
+      
       <FinalCTA />
     </main>
     <Footer />
