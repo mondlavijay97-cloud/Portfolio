@@ -102,7 +102,7 @@ const ClarityHub = () => (
     >
       <div className="text-center px-6 space-y-2">
         <motion.p
-          className="text-sm md:text-base text-muted-foreground"
+          className="text-base md:text-lg text-muted-foreground"
           initial={{ opacity: 0, y: 6 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -111,7 +111,7 @@ const ClarityHub = () => (
           Content is not hard.
         </motion.p>
         <motion.p
-          className="text-lg md:text-xl font-bold font-heading text-gradient"
+          className="text-xl md:text-2xl font-bold font-heading text-gradient"
           style={{ filter: "drop-shadow(0 0 16px hsl(var(--primary) / 0.6))" }}
           initial={{ opacity: 0, y: 6 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -252,7 +252,7 @@ const ConfusionCard = ({
                 }}
               />
             </div>
-            <span className="text-sm font-medium text-foreground/80">{item.title}</span>
+            <span className="text-base font-medium text-foreground/80">{item.title}</span>
           </div>
         </div>
       </motion.div>
