@@ -77,6 +77,52 @@ const ModuleCard = ({
 /* Premium 3-layer center hub */
 const CenterHub = () => (
   <div className="relative flex items-center justify-center" style={{ width: 220, height: 220 }}>
+    {/* Expanding ripple waves (matching ProblemSection design) */}
+    {[0, 1, 2, 3].map((i) => (
+      <motion.div
+        key={`ripple-${i}`}
+        className="absolute rounded-full pointer-events-none"
+        style={{
+          width: 100 + i * 50,
+          height: 100 + i * 50,
+          border: "1px solid hsla(var(--primary), 0.12)",
+        }}
+        animate={{ scale: [1, 1.6], opacity: [0.3, 0] }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          delay: i * 1,
+          ease: "easeOut",
+        }}
+      />
+    ))}
+
+    {/* Static concentric rings */}
+    <div
+      className="absolute rounded-full pointer-events-none"
+      style={{
+        width: 200,
+        height: 200,
+        border: "1px solid hsla(var(--primary), 0.08)",
+      }}
+    />
+    <div
+      className="absolute rounded-full pointer-events-none"
+      style={{
+        width: 170,
+        height: 170,
+        border: "1px solid hsla(var(--primary), 0.15)",
+      }}
+    />
+    <div
+      className="absolute rounded-full pointer-events-none"
+      style={{
+        width: 140,
+        height: 140,
+        border: "1px solid hsla(var(--primary), 0.22)",
+      }}
+    />
+
     {/* Outer glow ring */}
     <motion.div
       className="absolute rounded-full pointer-events-none"
@@ -87,30 +133,6 @@ const CenterHub = () => (
       }}
       animate={{ scale: [1, 1.05, 1], opacity: [0.5, 0.8, 0.5] }}
       transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-    />
-
-    {/* Middle ring */}
-    <motion.div
-      className="absolute rounded-full pointer-events-none"
-      style={{
-        width: 140,
-        height: 140,
-        border: "1.5px solid hsla(var(--primary), 0.3)",
-      }}
-      animate={{ scale: [1, 1.03, 1], opacity: [0.6, 1, 0.6] }}
-      transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-    />
-
-    {/* Outer decorative ring */}
-    <motion.div
-      className="absolute rounded-full pointer-events-none"
-      style={{
-        width: 180,
-        height: 180,
-        border: "1px solid hsla(var(--primary), 0.12)",
-      }}
-      animate={{ scale: [1, 1.04, 1], opacity: [0.4, 0.7, 0.4] }}
-      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
     />
 
     {/* Inner core */}
