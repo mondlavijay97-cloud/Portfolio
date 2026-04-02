@@ -63,8 +63,8 @@ const FloatingPill = ({
             el.style.backdropFilter = "blur(16px)";
           }}
         >
-          <Icon size={18} className="text-primary shrink-0" />
-          <span className="text-sm font-medium text-foreground whitespace-nowrap">{text}</span>
+          <Icon size={24} className="text-primary shrink-0" />
+          <span className="text-base font-semibold text-foreground whitespace-nowrap">{text}</span>
         </motion.div>
       </motion.div>
     </motion.div>
