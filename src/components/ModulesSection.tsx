@@ -101,25 +101,6 @@ const CenterHub = () => (
       />
     ))}
 
-    {/* Ripple waves — matching Authority section */}
-    {[0, 1, 2, 3].map((i) => (
-      <motion.div
-        key={`ripple-${i}`}
-        className="absolute rounded-full"
-        style={{
-          width: 100,
-          height: 100,
-          border: "1.5px solid rgba(124, 58, 237, 0.55)",
-        }}
-        animate={{ scale: [0.5, 2.5], opacity: [0.5, 0.45, 0] }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          delay: i * 1,
-          ease: "easeOut",
-        }}
-      />
-    ))}
 
     {/* Inner core */}
     <motion.div

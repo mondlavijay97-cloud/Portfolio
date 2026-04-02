@@ -71,29 +71,6 @@ const FloatingPill = ({
   );
 };
 
-const ConcentricRings = () => (
-  <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ top: "-15%" }}>
-    {/* Ripple waves — water-like expanding circles */}
-    {[0, 1, 2, 3].map((i) => (
-      <motion.div
-        key={`ripple-${i}`}
-        className="absolute rounded-full"
-        style={{
-          width: 140,
-          height: 140,
-          border: "1.5px solid rgba(124, 58, 237, 0.55)",
-        }}
-        animate={{ scale: [0.5, 2.5], opacity: [0.5, 0.45, 0] }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          delay: i * 1,
-          ease: "easeOut",
-        }}
-      />
-    ))}
-  </div>
-);
 
 const BackgroundParticles = () => (
   <div className="absolute inset-0 pointer-events-none overflow-hidden">
