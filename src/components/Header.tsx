@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
       <div className="container flex h-16 items-center justify-between">
-        <a href="#" className="font-heading text-2xl font-bold tracking-tight">
+        <a href="#" className="font-heading text-3xl font-bold tracking-tight">
           <span className="text-gradient">Nomad</span> School
         </a>
 
