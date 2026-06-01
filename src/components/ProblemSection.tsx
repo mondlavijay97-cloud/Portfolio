@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Brain, Lightbulb, Bookmark, TrendingDown } from "lucide-react";
+import { EyeOff, Film, Palette, VolumeX } from "lucide-react";
 
 const confusionCards = [
-  { icon: Brain, title: "Don't know what to post", quadrant: "top-left" },
-  { icon: Lightbulb, title: "Overthinking content ideas", quadrant: "top-right" },
-  { icon: Bookmark, title: "Saving reels but not executing", quadrant: "bottom-left" },
-  { icon: TrendingDown, title: "Feeling left behind", quadrant: "bottom-right" },
+  { icon: EyeOff, title: "Low Audience Retention", bullets: ["Swiping away in first 3s"] },
+  { icon: Film, title: "Boring Static Visuals", bullets: ["No kinetic text or dynamic rhythm"] },
+  { icon: Palette, title: "Dull Muted Colors", bullets: ["Flat ungraded raw video profiles"] },
+  { icon: VolumeX, title: "Weak Sound Design", bullets: ["Muffled audio with zero impact SFX"] },
 ];
 
 /* ── Expanding radar ripples ── */
@@ -108,7 +108,7 @@ const ClarityHub = () => (
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          Content is not hard.
+          Editing is not hard.
         </motion.p>
         <motion.p
           className="text-xl md:text-2xl font-bold font-heading text-gradient"
@@ -118,7 +118,7 @@ const ClarityHub = () => (
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 1.3 }}
         >
-          Clarity is missing.
+          Storytelling is missing.
         </motion.p>
       </div>
     </div>
@@ -290,12 +290,12 @@ const ProblemSection = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            Why You Feel Stuck
+            The Stakes of Bad Editing
           </motion.span>
           <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl font-heading leading-tight">
-            You're Not Stuck. You're Just{" "}
+            Your Videos Aren't Boring. They're Just{" "}
             <span className="text-gradient" style={{ filter: "drop-shadow(0 0 20px hsl(var(--primary) / 0.5))" }}>
-              Confused.
+              Ignored.
             </span>
           </h2>
         </motion.div>

@@ -11,26 +11,26 @@ import stepMonetize from "@/assets/step-monetize.jpg";
 const steps = [
   {
     num: "01",
-    title: "Learn",
-    description: "Master content fundamentals and build a strong creative foundation.",
+    title: "Concept & Hook Analysis",
+    description: "Deconstructing your script to plan visual hooks, transitions, and pacing before editing begins.",
     image: stepLearn,
   },
   {
     num: "02",
-    title: "Create",
-    description: "Build compelling content that resonates with your audience.",
+    title: "Rhythm & Sound Design",
+    description: "Cutting the narrative track to build momentum, and laying down immersive SFX and ambient audio.",
     image: stepCreate,
   },
   {
     num: "03",
-    title: "Grow",
-    description: "Scale your reach and build a loyal community fast.",
+    title: "Motion & Color Grade",
+    description: "Integrating premium custom motion graphics, kinetic typography, and high-fidelity color grading.",
     image: stepGrow,
   },
   {
     num: "04",
-    title: "Monetize",
-    description: "Turn your content into a sustainable income stream.",
+    title: "Retention Tuning",
+    description: "Fine-tuning the edit using analytics insights to ensure maximum watch-time and user engagement.",
     image: stepMonetize,
   },
 ];
@@ -97,7 +97,7 @@ const CourseIntro = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative py-24 overflow-hidden" style={{ backgroundColor: "hsl(240, 20%, 4%)" }}>
+    <section id="process" className="relative py-24 overflow-hidden" style={{ backgroundColor: "hsl(240, 20%, 4%)" }}>
       {/* Subtle radial glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] rounded-full bg-primary/[0.08] blur-[160px]" />
@@ -122,7 +122,7 @@ const CourseIntro = () => {
             transition={{ duration: 0.5 }}
             className="text-md font-semibold tracking-[0.25em] text-primary/70 font-heading uppercase"
           >
-            Introducing
+            My Process
           </motion.p>
 
           <motion.h2
@@ -131,10 +131,11 @@ const CourseIntro = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl sm:text-5xl font-bold font-heading text-white"
           >
+            Cinematic{" "}
             <span className="text-gradient" style={{ filter: "drop-shadow(0 0 18px rgba(124,58,237,0.35))" }}>
-              Nomad
+              Production
             </span>{" "}
-            School
+            Pipeline
           </motion.h2>
 
           <motion.p
@@ -144,7 +145,7 @@ const CourseIntro = () => {
             className="text-base max-w-md mx-auto"
             style={{ color: "#C4C4CC" }}
           >
-            A simple system to start, grow & monetize content
+            My step-by-step editing methodology to ensure maximum quality and watch-time.
           </motion.p>
         </div>
 
@@ -165,7 +166,7 @@ const CourseIntro = () => {
         >
           <Button variant="gradient" size="lg" asChild>
             <a href="#modules">
-              View Curriculum <ArrowRight size={18} />
+              See My Core Services <ArrowRight size={18} />
             </a>
           </Button>
         </motion.div>

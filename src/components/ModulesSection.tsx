@@ -1,20 +1,20 @@
-import { BookOpen, PenTool, FileText, MessageSquare, Film, Bot, TrendingUp, Coins, User, ArrowRight } from "lucide-react";
+import { Film, PenTool, Layers, Volume2, Sparkles, Eye, Briefcase, Target, User, ArrowRight } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 const leftModules = [
-  { icon: BookOpen, title: "Content Foundations", bullets: ["Creator mindset", "Platform understanding"] },
-  { icon: PenTool, title: "Content Strategy", bullets: ["Niche selection", "Positioning"] },
-  { icon: FileText, title: "Script Writing", bullets: ["Hooks & retention", "CTA placement"] },
-  { icon: MessageSquare, title: "Storytelling", bullets: ["Narrative arcs", "Emotional triggers"] },
+  { icon: Film, title: "Cinematic Editing", bullets: ["Documentaries · YouTube Masterclasses · Commercials"] },
+  { icon: PenTool, title: "Motion Graphics", bullets: ["Advanced kinetic typography · Dynamic callouts · UI animation"] },
+  { icon: Layers, title: "Color Grading", bullets: ["Primary corrections · Skin-tone matching · Creative grading"] },
+  { icon: Volume2, title: "Immersive Audio", bullets: ["Sound effects design · Ambient mixing · Voice enhancement"] },
 ];
 
 const rightModules = [
-  { icon: Film, title: "Editing System", bullets: ["Efficient workflows", "Tool stack"] },
-  { icon: Bot, title: "AI Content Creation", bullets: ["Prompt engineering", "Automation"] },
-  { icon: TrendingUp, title: "Growth Systems", bullets: ["Instagram & YouTube growth", "Algorithm understanding"] },
-  { icon: Coins, title: "Monetization", bullets: ["Freelancing", "Brand deals & income streams"] },
+  { icon: Sparkles, title: "Retention Pacing", bullets: ["Aggressive visual pacing · Metric optimized structural cuts"] },
+  { icon: Eye, title: "Visual Direction", bullets: ["Unique creative styling · Moodboards · Customized brand identity"] },
+  { icon: Briefcase, title: "Corporate Promos", bullets: ["Sleek testimonials · SaaS product explainers · Internal showcases"] },
+  { icon: Target, title: "High-Impact Ads", bullets: ["Conversion-driven ad creatives · Direct-response copy styling"] },
 ];
 
 const ModuleCard = ({
@@ -297,7 +297,7 @@ const ModulesSection = () => {
             transition={{ duration: 0.5 }}
             className="text-sm font-semibold tracking-[0.25em] text-primary/70 uppercase"
           >
-            Complete Learning Ecosystem
+            Core Competencies
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -305,12 +305,12 @@ const ModulesSection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl sm:text-5xl font-bold font-heading"
           >
-            What You'll{" "}
+            My Elite{" "}
             <span
               className="text-gradient"
               style={{ filter: "drop-shadow(0 0 20px hsla(var(--primary), 0.4))" }}
             >
-              Learn
+              Services
             </span>
           </motion.h2>
         </div>
@@ -372,8 +372,8 @@ const ModulesSection = () => {
           className="text-center"
         >
           <Button variant="gradient" size="lg" asChild>
-            <a href="#pricing">
-              Start Learning Now <ArrowRight size={18} />
+            <a href="#contact">
+              Hire Me Today <ArrowRight size={18} />
             </a>
           </Button>
         </motion.div>

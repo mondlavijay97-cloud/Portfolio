@@ -3,10 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, ArrowRight } from "lucide-react";
 
 const navLinks = [
-  { label: "Curriculum", href: "#modules" },
-  { label: "Outcomes", href: "#transformation" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQs", href: "#objections" },
+  { label: "Services", href: "#modules" },
+  { label: "Pipeline", href: "#process" },
+  { label: "Work", href: "#toolkit" },
 ];
 
 const Header = () => {
@@ -16,7 +15,7 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
       <div className="container flex h-16 items-center justify-between">
         <a href="#" className="font-heading text-3xl font-bold tracking-tight">
-          <span className="text-gradient">Nomad</span> School
+          <span className="text-gradient">Vijay</span> Kumar
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -26,7 +25,7 @@ const Header = () => {
             </a>
           ))}
           <Button variant="gradient" size="default" asChild>
-            <a href="#pricing" className="text-base">Enroll Now <ArrowRight size={18} /></a>
+            <a href="#contact" className="text-base">Let's Talk<ArrowRight size={18} /></a>
           </Button>
         </nav>
 
@@ -44,7 +43,7 @@ const Header = () => {
               </a>
             ))}
             <Button variant="gradient" size="lg" asChild>
-              <a href="#pricing" onClick={() => setMobileOpen(false)}>Enroll Now <ArrowRight size={18} /></a>
+              <a href="#contact" onClick={() => setMobileOpen(false)}>Hire Me <ArrowRight size={18} /></a>
             </Button>
           </nav>
         </div>

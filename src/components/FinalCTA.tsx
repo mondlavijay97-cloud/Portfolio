@@ -3,7 +3,7 @@ import { ArrowRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
 
 const FinalCTA = () => (
-  <section className="py-24 relative overflow-hidden bg-background">
+  <section id="contact" className="py-24 relative overflow-hidden bg-background">
     {/* Background glow */}
     <div className="absolute inset-0 pointer-events-none">
       <motion.div
@@ -33,35 +33,53 @@ const FinalCTA = () => (
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-heading leading-tight">
-            Stop Overthinking.
+            Let's Build Something
             <br />
-            <span className="text-gradient">Start Building.</span>
+            <span className="text-gradient">Extraordinary.</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-md">
-            Start from zero. Build real skills. Grow with clarity.
+            Transform your raw footage into high-retention commercial assets today.
           </p>
 
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 pt-2"
+            className="space-y-4 pt-2"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.25 }}
           >
-            <Button
-              variant="gradient"
-              size="xl"
-              onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
-            >
-              Enroll Now — ₹4,999 <ArrowRight size={18} />
-            </Button>
-            <Button
-              variant="outline"
-              size="xl"
-              onClick={() => document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" })}
-            >
-              Get Live Support — ₹6,999 <ArrowRight size={18} />
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button
+                variant="gradient"
+                size="xl"
+                className="group transition-all duration-300 hover:-translate-y-0.5"
+                asChild
+              >
+                <a 
+                  href="https://calendly.com/mondlavijay97/30min" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="Book a consultation call with Vijay Kumar"
+                >
+                  Let's Discuss Your Project{" "}
+                  <ArrowRight size={18} className="ml-2 inline transition-transform duration-300 group-hover:translate-x-1" />
+                </a>
+              </Button>
+              <Button
+                variant="outline"
+                size="xl"
+                className="group transition-all duration-300 hover:-translate-y-0.5"
+                onClick={() => document.getElementById("process")?.scrollIntoView({ behavior: "smooth" })}
+              >
+                Explore My Pipeline{" "}
+                <ArrowRight size={18} className="ml-2 inline transition-transform duration-300 group-hover:translate-x-1" />
+              </Button>
+            </div>
+            
+            {/* Subtle Trust Text */}
+            <p className="text-white/40 text-xs sm:text-sm tracking-wide font-medium pl-1">
+              &bull; Available for freelance & contract projects &bull; Usually responds within 24 hours
+            </p>
           </motion.div>
         </motion.div>
 
@@ -85,8 +103,8 @@ const FinalCTA = () => (
             </div>
 
             <p className="text-foreground/90 text-base leading-relaxed italic">
-              "I started from zero and within weeks I was consistently creating
-              content. This system actually works."
+              "Vijay's edits completely transformed our content strategy. Our viewer
+              retention jumped by 40% and our revenue doubled within two months."
             </p>
 
             <div className="flex items-center gap-3 pt-1">
@@ -95,7 +113,7 @@ const FinalCTA = () => (
               </div>
               <div>
                 <p className="text-sm font-semibold text-foreground">Aman Verma</p>
-                <p className="text-xs text-muted-foreground">Student</p>
+                <p className="text-xs text-muted-foreground">Creator & Brand Founder</p>
               </div>
             </div>
           </motion.div>

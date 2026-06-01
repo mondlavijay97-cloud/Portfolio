@@ -3,13 +3,13 @@ import { motion } from "framer-motion";
 import { TrendingUp, Briefcase, UserCheck, DollarSign } from "lucide-react";
 
 const outcomes = [
-  { icon: UserCheck, text: "Build personal brand", id: 0 },
-  { icon: Briefcase, text: "Get freelance clients", id: 1 },
-  { icon: TrendingUp, text: "Land better jobs", id: 2 },
-  { icon: DollarSign, text: "Create income streams", id: 3 },
+  { icon: UserCheck, text: "Retain Audiences", id: 0 },
+  { icon: Briefcase, text: "Elevate Brand Value", id: 1 },
+  { icon: TrendingUp, text: "Drive Conversions", id: 2 },
+  { icon: DollarSign, text: "Scale Organically", id: 3 },
 ];
 
-const words = ["Skill", "Leverage", "Opportunity"];
+const words = ["Rhythm", "Color", "Structure"];
 
 /* Particles flowing along the main beam */
 const BeamParticles = ({ boostedCard }: { boostedCard: number | null }) => (
@@ -171,8 +171,8 @@ const OpportunitySection = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl font-heading">
-            Content is the{" "}
-            <span className="text-gradient">New Skill</span>
+            Videos are the{" "}
+            <span className="text-gradient">Ultimate Leverage</span>
           </h2>
         </motion.div>
 
@@ -215,7 +215,7 @@ const OpportunitySection = () => {
               }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              CONTENT
+              VIDEO ENGINE
             </motion.div>
           </motion.div>
 
@@ -280,15 +280,16 @@ const OpportunitySection = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.4 + id * 0.1 }}
                   whileHover={{ y: -5, scale: 1.03 }}
                   animate={{
                     y: [0, -3, 0],
                     opacity: isDimmed ? 0.5 : 1,
                   }}
-                  // @ts-ignore
-                  transition_float={{
+                  transition={{
+                    duration: 0.4,
+                    delay: 0.4 + id * 0.1,
                     y: { duration: 3 + id * 0.4, repeat: Infinity, ease: "easeInOut" },
+                    opacity: { duration: 0.3 }
                   }}
                   onMouseEnter={() => setHovered(id)}
                   onMouseLeave={() => setHovered(null)}
@@ -341,7 +342,7 @@ const OpportunitySection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            Content ={" "}
+            Video ={" "}
             {words.map((word, i) => (
               <motion.span
                 key={word}

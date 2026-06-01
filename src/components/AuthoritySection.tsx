@@ -1,99 +1,7 @@
-import { Users, Award, Shield, BookOpen, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import mentorImage from "@/assets/ajay_nomad_bgless.png";
-
-const pills = [
-  { icon: Users, text: "80K+ audience built", position: "top-left" },
-  { icon: Award, text: "Worked with top brands", position: "top-right" },
-  { icon: Shield, text: "Real-world strategies", position: "bottom-left" },
-  { icon: BookOpen, text: "No theory — all execution", position: "bottom-right" },
-] as const;
-
-const pillPositions = {
-  "top-left": { desktop: "top-[20%] left-[8%]", delay: 0 },
-  "top-right": { desktop: "top-[20%] right-[8%]", delay: 0.8 },
-  "bottom-left": { desktop: "bottom-[30%] left-[8%]", delay: 1.6 },
-  "bottom-right": { desktop: "bottom-[30%] right-[8%]", delay: 2.4 },
-};
-
-const FloatingPill = ({
-  icon: Icon,
-  text,
-  position,
-}: {
-  icon: typeof Users;
-  text: string;
-  position: keyof typeof pillPositions;
-}) => {
-  const pos = pillPositions[position];
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: 0.3 }}
-      className={`absolute ${pos.desktop} z-20 hidden lg:block`}
-    >
-      <motion.div
-        animate={{ y: [0, -6, 0] }}
-        transition={{ duration: 4 + pos.delay, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <motion.div
-          whileHover={{ y: -4, scale: 1.03 }}
-          transition={{ duration: 0.3 }}
-          className="group flex items-center gap-4 rounded-full px-7 py-4 cursor-default transition-all duration-300"
-          style={{
-            backgroundColor: "rgba(24, 24, 37, 0.6)",
-            backdropFilter: "blur(16px)",
-            border: "1px solid rgba(124, 58, 237, 0.2)",
-            boxShadow: "0 4px 20px rgba(0, 0, 0, 0.3)",
-          }}
-          onMouseEnter={(e) => {
-            const el = e.currentTarget;
-            el.style.borderColor = "rgba(124, 58, 237, 0.5)";
-            el.style.boxShadow = "0 4px 30px rgba(124, 58, 237, 0.2), 0 0 15px rgba(124, 58, 237, 0.1)";
-            el.style.backdropFilter = "blur(24px)";
-          }}
-          onMouseLeave={(e) => {
-            const el = e.currentTarget;
-            el.style.borderColor = "rgba(124, 58, 237, 0.2)";
-            el.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.3)";
-            el.style.backdropFilter = "blur(16px)";
-          }}
-        >
-          <Icon size={24} className="text-primary shrink-0" />
-          <span className="text-base font-semibold text-foreground whitespace-nowrap">{text}</span>
-        </motion.div>
-      </motion.div>
-    </motion.div>
-  );
-};
-
-const ConcentricRings = () => (
-  <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ top: "-15%" }}>
-    {/* Ripple waves — water-like expanding circles */}
-    {[0, 1, 2, 3].map((i) => (
-      <motion.div
-        key={`authority-ripple-${i}`}
-        className="absolute rounded-full"
-        style={{
-          width: 140,
-          height: 140,
-          border: "1.5px solid rgba(124, 58, 237, 0.55)",
-        }}
-        animate={{ scale: [0.8, 2.5], opacity: [0, 0.45, 0] }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          delay: i * 1,
-          ease: "easeOut",
-        }}
-      />
-    ))}
-  </div>
-);
+import storiesBanner from "@/assets/stories-banner.jpg";
 
 const BackgroundParticles = () => (
   <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -131,8 +39,8 @@ const AuthoritySection = () => (
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         style={{
-          width: 700,
-          height: 700,
+          width: 800,
+          height: 800,
           borderRadius: "50%",
           background: "radial-gradient(circle, hsla(var(--primary), 0.12) 0%, transparent 70%)",
           filter: "blur(60px)",
@@ -142,7 +50,7 @@ const AuthoritySection = () => (
 
     <BackgroundParticles />
 
-    <div className="container relative z-10 max-w-5xl space-y-12">
+    <div className="container relative z-10 max-w-6xl space-y-12">
       {/* Heading */}
       <div className="text-center space-y-4">
         <motion.p
@@ -152,7 +60,7 @@ const AuthoritySection = () => (
           className="text-sm font-semibold tracking-[0.25em] uppercase"
           style={{ color: "hsl(var(--primary))", opacity: 0.7 }}
         >
-          Your Mentor
+          Creative Director
         </motion.p>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -161,10 +69,10 @@ const AuthoritySection = () => (
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-4xl sm:text-5xl lg:text-6xl font-bold font-heading"
         >
-          Learn From Someone Who's
+          An Editor Trusted By
           <br />
           <span className="text-gradient" style={{ filter: "drop-shadow(0 0 20px hsla(var(--primary), 0.4))" }}>
-            Done It
+            Brands Worldwide
           </span>
         </motion.h2>
         <motion.p
@@ -175,70 +83,73 @@ const AuthoritySection = () => (
           className="text-base sm:text-lg max-w-xl mx-auto"
           style={{ color: "#B8B8C0" }}
         >
-          Built an audience. Worked with brands. Now teaching you the system.
+          Directing visual narratives that build massive organic traffic and drive industry results.
         </motion.p>
       </div>
 
-      {/* Central image + floating pills */}
-      <div className="relative flex justify-center !mt-0" style={{ minHeight: 520 }}>
-        <ConcentricRings />
-
-        {/* Floating pills */}
-        {pills.map((pill) => (
-          <FloatingPill key={pill.text} {...pill} />
-        ))}
-
-        {/* Creator image */}
+      {/* Central banner */}
+      <div className="relative w-full !mt-12 flex flex-col items-center justify-center">
+        {/* Premium Portfolio Showcase Card */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative z-10 flex justify-center"
+          className="relative z-10 w-full md:w-[96%] lg:w-[94%] flex justify-center"
         >
-          {/* Glow behind image */}
-          <div
-            className="absolute bottom-0 left-1/2 -translate-x-1/2"
-            style={{
-              width: 350,
-              height: 350,
-              borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(124, 58, 237, 0.25) 0%, rgba(124, 58, 237, 0.08) 50%, transparent 70%)",
-              filter: "blur(40px)",
-              transform: "translate(-50%, 10%)",
+          {/* Inner floating container */}
+          <motion.div
+            animate={{ y: [0, -8, 0] }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
             }}
-          />
-          <img
-            src={mentorImage}
-            alt="Ajay Nomad — Your Mentor"
-            className="relative z-10 w-[280px] sm:w-[320px] lg:w-[360px] object-contain"
-            style={{
-              maskImage: "linear-gradient(to bottom, black 60%, transparent 95%)",
-              WebkitMaskImage: "linear-gradient(to bottom, black 60%, transparent 95%)",
-              filter: "drop-shadow(0 0 40px rgba(124, 58, 237, 0.2))",
+            whileHover={{
+              scale: 1.02,
+              borderColor: "rgba(124, 58, 237, 0.6)",
+              boxShadow: "0 0 50px rgba(124, 58, 237, 0.4), 0 10px 40px rgba(0, 0, 0, 0.6)",
             }}
-          />
-        </motion.div>
+            className="w-full rounded-[20px] md:rounded-[24px] overflow-hidden cursor-default transition-all duration-500 border border-violet-500/20 shadow-2xl relative bg-[#05010D]/40"
+            style={{
+              backdropFilter: "blur(12px)",
+              boxShadow: "0 10px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 20px rgba(124, 58, 237, 0.1)",
+            }}
+          >
+            {/* Pulsing radial glow behind the card inside */}
+            <motion.div
+              className="absolute inset-0 pointer-events-none z-0 opacity-40 blur-[40px]"
+              style={{
+                background: "radial-gradient(circle at center, rgba(124, 58, 237, 0.35) 0%, transparent 70%)",
+              }}
+              animate={{
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
 
-        {/* Mobile pills — 2 per row */}
-        <div className="lg:hidden absolute bottom-0 left-0 right-0 z-20">
-          <div className="grid grid-cols-2 gap-3 px-4">
-            {pills.map(({ icon: Icon, text }) => (
-              <div
-                key={text}
-                className="flex items-center gap-2 rounded-full px-4 py-2.5"
-                style={{
-                  backgroundColor: "rgba(24, 24, 37, 0.6)",
-                  backdropFilter: "blur(16px)",
-                  border: "1px solid rgba(124, 58, 237, 0.2)",
-                }}
-              >
-                <Icon size={14} className="text-primary shrink-0" />
-                <span className="text-xs font-medium text-foreground">{text}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+            {/* Dark overlay between 20%-30% */}
+            <div className="absolute inset-0 bg-black/25 z-10 pointer-events-none" />
+
+            {/* Vignette effect overlay */}
+            <div 
+              className="absolute inset-0 z-10 pointer-events-none"
+              style={{
+                background: "radial-gradient(circle, transparent 65%, rgba(5, 1, 13, 0.65) 100%)",
+              }}
+            />
+
+            <img
+              src={storiesBanner}
+              alt="We Don't Just Edit, We Tell Stories — Vijay Kumar Creative Showcase"
+              className="w-full h-full object-cover aspect-[2/1] relative z-0 select-none pointer-events-none"
+            />
+          </motion.div>
+        </motion.div>
       </div>
 
       {/* CTA */}
@@ -247,11 +158,11 @@ const AuthoritySection = () => (
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.3 }}
-        className="text-center"
+        className="text-center !mt-16"
       >
         <Button variant="gradient" size="lg" asChild>
-          <a href="#pricing">
-            Enroll Now <ArrowRight size={18} />
+          <a href="#contact">
+            Book a Strategy Call <ArrowRight size={18} />
           </a>
         </Button>
       </motion.div>

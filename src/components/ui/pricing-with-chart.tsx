@@ -24,10 +24,10 @@ export function PricingWithChart() {
       {/* Heading */}
       <div className="flex flex-col items-center gap-4 text-center mb-12">
         <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl font-heading">
-          Choose Your <span className="text-gradient">Plan</span>
+          Retainer <span className="text-gradient">Packages</span>
         </h2>
         <p className="max-w-xl text-muted-foreground text-base">
-          Transparent pricing built for creators. Pick the plan that fits your journey.
+          Transparent monthly creative retainers crafted to fit your brand's unique needs.
         </p>
       </div>
 
@@ -39,29 +39,33 @@ export function PricingWithChart() {
             <div className="flex flex-col gap-2">
               <div className="flex flex-row gap-2 items-center">
                 <p className="text-lg font-semibold font-heading text-foreground">
-                  Recorded Course
+                  Short-Form Growth Pack
                 </p>
               </div>
               <span className="text-4xl font-bold font-heading text-foreground tracking-tight">
-                ₹4,999
+                ₹24,999<span className="text-xs font-normal text-muted-foreground">/mo</span>
               </span>
               <p className="text-sm text-muted-foreground">
-                Best for self-paced learners
+                Best for vertical social platforms
               </p>
             </div>
 
-            <Button variant="outline" size="lg" className="w-full">
-              Enroll Now <ArrowRight size={18} />
+            <Button variant="outline" size="lg" className="w-full" asChild>
+              <a href="https://calendly.com" target="_blank" rel="noopener noreferrer">
+                Let's Get Started <ArrowRight size={18} />
+              </a>
             </Button>
 
             <hr className="border-primary/10" />
 
             <div className="flex flex-col gap-3">
               {[
-                '5-hour training',
-                'Lifetime access',
-                'All 7 modules',
-                'Bonus resources',
+                '10 Viral-Optimized Vertical Edits',
+                'Hook & Script Consultation',
+                'Kinetic Typography & GFX',
+                'Dynamic Sound Architecture',
+                '2 revision rounds per clip',
+                'Dedicated Slack/WhatsApp support',
               ].map((item, index) => (
                 <div key={index} className="flex items-center gap-3">
                   <CheckCircleIcon size={16} className="text-primary-bright shrink-0" />
@@ -75,20 +79,20 @@ export function PricingWithChart() {
         {/* Pro Plan - spans 2 columns */}
         <Card className="glass-card border-primary/40 glow-purple lg:col-span-2 relative">
           <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-gradient-cta px-5 py-1 text-xs font-bold tracking-wide text-primary-foreground shadow-lg z-10">
-            POPULAR
+            POPULAR RETAINER
           </span>
           <div className="grid grid-cols-1 md:grid-cols-2 h-full">
             {/* Pricing + Chart */}
             <div className="flex flex-col gap-6 p-8 border-b md:border-b-0 md:border-r border-primary/10">
               <div className="flex flex-col gap-2">
                 <p className="text-lg font-semibold font-heading text-foreground">
-                  Recorded + Live Support
+                  Cinematic Horizontal Package
                 </p>
                 <span className="text-4xl font-bold font-heading text-foreground tracking-tight">
-                  ₹6,999
+                  ₹59,999<span className="text-xs font-normal text-muted-foreground">/mo</span>
                 </span>
                 <p className="text-sm text-muted-foreground">
-                  Perfect for serious creators
+                  Complete custom visual production
                 </p>
               </div>
 
@@ -99,20 +103,20 @@ export function PricingWithChart() {
             {/* Features */}
             <div className="flex flex-col gap-6 p-8">
               <p className="text-sm font-semibold font-heading text-foreground">
-                Everything in Recorded plus:
+                Everything in Short-Form plus:
               </p>
               <div className="flex flex-col gap-3 flex-1">
                 {[
-                  'Live Q&A sessions',
-                  'Community access',
-                  'Personal feedback',
-                  'Priority support',
-                  'Exclusive templates',
-                  'Live masterclasses',
-                  'Accountability group',
-                  'Certificate of completion',
-                  'Early access to new modules',
-                  'Direct mentor access',
+                  '4 Cinematic Horizontal Videos (up to 10m)',
+                  'Hollywood-Grade Color Correction',
+                  'Immersive Custom Sound & SFX Design',
+                  'Advanced Motion Graphics Layers',
+                  'Priority Scheduling & Rapid Render',
+                  'Source Assets & Project Files Delivered',
+                  'Direct Creative Strategy Audits',
+                  'Urgent 24hr Revision Turnaround',
+                  'Dedicated Private Slack Workspace',
+                  'Unlimited Video Call Consultations',
                 ].map((item, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <CheckCircleIcon size={16} className="text-primary-bright shrink-0" />
@@ -123,11 +127,13 @@ export function PricingWithChart() {
 
               {/* Call to Action */}
               <div className="flex flex-col gap-3">
-                <Button variant="gradient" size="lg" className="w-full">
-                  Enroll Now <ArrowRight size={18} />
+                <Button variant="gradient" size="lg" className="w-full" asChild>
+                  <a href="https://calendly.com" target="_blank" rel="noopener noreferrer">
+                    Book Retainer Call <ArrowRight size={18} />
+                  </a>
                 </Button>
-                <span className="text-xs text-muted-foreground text-center">
-                  Join 500+ creators already enrolled
+                <span className="text-xs text-muted-foreground text-center font-semibold text-[#A855F7]">
+                  Limited to 3 clients per month
                 </span>
               </div>
             </div>
@@ -164,9 +170,9 @@ function InterestChart() {
   return (
     <Card className="bg-transparent border-none shadow-none">
       <CardHeader className="p-0 pb-2">
-        <CardTitle className="text-sm font-heading text-foreground">Plan Popularity</CardTitle>
+        <CardTitle className="text-sm font-heading text-foreground">Client Growth Trend</CardTitle>
         <CardDescription className="text-xs">
-          Monthly trend of creator enrollments
+          Average retention rate improvement (+%)
         </CardDescription>
       </CardHeader>
       <CardContent className="p-0">
