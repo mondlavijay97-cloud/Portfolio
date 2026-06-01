@@ -6,17 +6,28 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { portfolioCategories, VideoProject } from "@/data/portfolioData";
 
-// Video Card component to manage its own loading skeleton, aspect ratio, and fade-in cleanly
+// Video Card component with dynamic orientation auto-detection and custom metadata loading hooks
 const GalleryVideoCard = ({ 
   video,
   index,
-  aspectRatio
+  defaultAspectRatio
 }: { 
   video: VideoProject;
   index: number;
-  aspectRatio: "16/9" | "9/16";
+  defaultAspectRatio: "16/9" | "9/16";
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [aspectRatio, setAspectRatio] = useState<"16/9" | "9/16">(defaultAspectRatio);
+
+  const handleLoadedMetadata = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const videoEl = e.currentTarget;
+    if (videoEl.videoHeight > videoEl.videoWidth) {
+      setAspectRatio("9/16");
+    } else {
+      setAspectRatio("16/9");
+    }
+    setIsLoaded(true);
+  };
 
   const isVertical = aspectRatio === "9/16";
 
@@ -25,11 +36,8 @@ const GalleryVideoCard = ({
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.15 + index * 0.1 }}
-      // Loop vertical float offset animation
-      animate-float={{ y: [0, -6, 0] }}
-      style={{ y: [0, -6, 0] }}
       whileHover={{ 
-        scale: 1.01,
+        scale: 1.015,
         borderColor: "rgba(124, 58, 237, 0.6)",
         boxShadow: "0 0 35px rgba(124, 58, 237, 0.35)" 
       }}
@@ -37,7 +45,7 @@ const GalleryVideoCard = ({
         isVertical ? "max-w-[340px] mx-auto w-full" : "w-full"
       }`}
     >
-      {/* Video Player Container - Adapts aspect ratio based on video properties */}
+      {/* Video Player Container - Adapts aspect ratio dynamically based on loaded metadata properties */}
       <div 
         className={`relative w-full overflow-hidden rounded-lg bg-black/60 shadow-inner border border-white/5 ${
           isVertical ? "aspect-[9/16]" : "aspect-video"
@@ -58,7 +66,7 @@ const GalleryVideoCard = ({
           controls
           playsInline
           preload="metadata"
-          onLoadedData={() => setIsLoaded(true)}
+          onLoadedMetadata={handleLoadedMetadata}
           className={`w-full h-full object-contain transition-opacity duration-700 ease-out z-10 ${
             isLoaded ? "opacity-100" : "opacity-0"
           }`}
@@ -89,7 +97,7 @@ const PortfolioCategoryPage = () => {
     return (
       <div className="min-h-screen bg-[#05010D] text-white flex flex-col justify-between">
         <Header />
-        <main className="container max-w-4xl py-32 text-center space-y-6 flex-grow flex flex-col items-center justify-center">
+        <main className="container max-w-4xl py-32 text-center space-y-6 flex-grow flex flex-col items-center justify-center px-4">
           <div className="rounded-full bg-destructive/10 border border-destructive/20 p-6 glow-purple">
             <Video size={48} className="text-destructive" />
           </div>
@@ -120,7 +128,7 @@ const PortfolioCategoryPage = () => {
       
       <Header />
 
-      <main className="relative z-10 pt-28 pb-20 container max-w-5xl space-y-16">
+      <main className="relative z-10 pt-28 pb-20 container max-w-5xl space-y-16 px-4 sm:px-6 lg:px-8">
         
         {/* Back Button */}
         <motion.div
@@ -150,7 +158,7 @@ const PortfolioCategoryPage = () => {
             <span className="text-xs font-bold tracking-[0.2em] text-primary uppercase flex items-center gap-1.5">
               <Folder size={12} className="text-primary fill-primary/30" /> Category Archive
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-heading tracking-tight leading-tight">
+            <h1 className="text-[clamp(2.2rem,6vw,4rem)] font-bold font-heading tracking-tight leading-tight">
               <span className="text-gradient">{currentCategory.title}s</span>
             </h1>
           </motion.div>
@@ -174,25 +182,25 @@ const PortfolioCategoryPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex items-center justify-between"
+            className="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
           >
             <div className="space-y-1">
               <h2 className="text-xl sm:text-2xl font-bold font-heading text-white">Project Gallery</h2>
-              <p className="text-xs text-muted-foreground">Click a video project below to load and play controls.</p>
+              <p className="text-xs text-muted-foreground">Video sizes are detected automatically to preserve full original screen proportions.</p>
             </div>
-            <div className="bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider text-primary uppercase">
+            <div className="bg-white/5 border border-white/10 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider text-primary uppercase w-fit">
               {currentCategory.videos.length} Films
             </div>
           </motion.div>
 
           {/* Grid Layout - 2 columns desktop/tablet, 1 column mobile */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-center">
             {currentCategory.videos.map((video, index) => (
               <GalleryVideoCard
                 key={video.id}
                 video={video}
                 index={index}
-                aspectRatio={currentCategory.aspectRatio}
+                defaultAspectRatio={currentCategory.aspectRatio}
               />
             ))}
           </div>

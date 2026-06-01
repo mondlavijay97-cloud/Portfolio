@@ -22,37 +22,43 @@ const FinalCTA = () => (
       />
     </div>
 
-    <div className="container max-w-6xl relative z-10">
-      <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-center">
-        {/* Left */}
+    <div className="container max-w-6xl relative z-10 px-4 sm:px-6 lg:px-8">
+      {/* 
+          Desktop (lg and up): 2 columns, text left, cards right
+          Mobile/Tablet: Centered vertical stacked column, gap-12
+      */}
+      <div className="flex flex-col lg:grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-16 items-center text-center lg:text-left">
+        
+        {/* Left Editorial Content Block */}
         <motion.div
-          className="space-y-6"
+          className="space-y-6 flex flex-col items-center lg:items-start w-full"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-heading leading-tight">
+          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-bold font-heading leading-tight max-w-xl">
             Let's Build Something
             <br />
             <span className="text-gradient">Extraordinary.</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-md">
+          <p className="text-muted-foreground text-base sm:text-lg max-w-md">
             Transform your raw footage into high-retention commercial assets today.
           </p>
 
           <motion.div
-            className="space-y-4 pt-2"
+            className="space-y-4 pt-2 w-full flex flex-col items-center lg:items-start"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.25 }}
           >
-            <div className="flex flex-col sm:flex-row gap-4">
+            {/* CTA Buttons: stacked full-width on mobile, side-by-side inline on larger screens */}
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center lg:justify-start px-4 sm:px-0">
               <Button
                 variant="gradient"
                 size="xl"
-                className="group transition-all duration-300 hover:-translate-y-0.5"
+                className="group transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto flex justify-center"
                 asChild
               >
                 <a 
@@ -68,7 +74,7 @@ const FinalCTA = () => (
               <Button
                 variant="outline"
                 size="xl"
-                className="group transition-all duration-300 hover:-translate-y-0.5"
+                className="group transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto flex justify-center"
                 onClick={() => document.getElementById("process")?.scrollIntoView({ behavior: "smooth" })}
               >
                 Explore My Pipeline{" "}
@@ -77,21 +83,22 @@ const FinalCTA = () => (
             </div>
             
             {/* Subtle Trust Text */}
-            <p className="text-white/40 text-xs sm:text-sm tracking-wide font-medium pl-1">
+            <p className="text-white/40 text-xs sm:text-sm tracking-wide font-medium pl-1 text-center lg:text-left">
               &bull; Available for freelance & contract projects &bull; Usually responds within 24 hours
             </p>
           </motion.div>
         </motion.div>
 
-        {/* Right – social proof card */}
+        {/* Right Social Proof Card */}
         <motion.div
+          className="w-full max-w-md mx-auto lg:max-w-none"
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <motion.div
-            className="glass-card rounded-2xl p-8 space-y-5 glow-purple"
+            className="glass-card rounded-2xl p-6 sm:p-8 space-y-5 glow-purple text-left"
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
           >
@@ -102,7 +109,7 @@ const FinalCTA = () => (
               ))}
             </div>
 
-            <p className="text-foreground/90 text-base leading-relaxed italic">
+            <p className="text-foreground/90 text-sm sm:text-base leading-relaxed italic">
               "Vijay's edits completely transformed our content strategy. Our viewer
               retention jumped by 40% and our revenue doubled within two months."
             </p>
