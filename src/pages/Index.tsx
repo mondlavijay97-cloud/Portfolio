@@ -8,6 +8,7 @@ import OpportunitySection from "@/components/OpportunitySection";
 import ModulesSection from "@/components/ModulesSection";
 import AuthoritySection from "@/components/AuthoritySection";
 import FeaturedWorkSection from "@/components/FeaturedWorkSection";
+import ClientFeedbackSection from "@/components/ClientFeedbackSection";
 import SocialSection from "@/components/SocialSection";
 
 import FinalCTA from "@/components/FinalCTA";
@@ -46,6 +47,7 @@ const Index = () => {
           <HeroSection />
           <AuthoritySection />
           <FeaturedWorkSection />
+          <ClientFeedbackSection />
           <ProblemSection />
           <OpportunitySection />
           <ModulesSection />
