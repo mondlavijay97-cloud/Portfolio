@@ -75,9 +75,9 @@ const FinalCTA = () => (
                 variant="outline"
                 size="xl"
                 className="group transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto flex justify-center"
-                onClick={() => document.getElementById("process")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => document.getElementById("toolkit")?.scrollIntoView({ behavior: "smooth" })}
               >
-                Explore My Pipeline{" "}
+                Explore My Work{" "}
                 <ArrowRight size={18} className="ml-2 inline transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
             </div>

@@ -42,10 +42,10 @@ const FeaturedWorkSection = () => {
         {/* Header */}
         <div className="text-center space-y-3">
           <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl">
-            <span className="text-gradient">Portfolio</span> Categories
+            My <span className="text-gradient">Work</span>
           </h2>
           <p className="text-muted-foreground text-base sm:text-lg max-w-xl mx-auto leading-relaxed">
-            Explore a curated collection of professional editing projects across commercials, brand campaigns, social content, motion graphics, corporate films, and wedding storytelling.
+            Explore a selection of commercials, reels, motion graphics, wedding films, corporate projects, and brand campaigns crafted to drive engagement and tell compelling stories.
           </p>
         </div>
 

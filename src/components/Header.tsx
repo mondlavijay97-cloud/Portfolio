@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { label: "Services", href: "#modules" },
-  { label: "Pipeline", href: "#process" },
   { label: "Work", href: "#toolkit" },
 ];
 
@@ -16,7 +15,7 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
       <div className="container flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
         <a href="#" className="font-heading text-3xl font-bold tracking-tight">
-          <span className="text-gradient">Vijay</span> Kumar
+          Hello, I'm <span className="text-gradient">Vijay</span>
         </a>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -30,8 +29,8 @@ const Header = () => {
           </Button>
         </nav>
 
-        <button 
-          className="md:hidden text-foreground hover:text-primary transition-colors p-2" 
+        <button
+          className="md:hidden text-foreground hover:text-primary transition-colors p-2"
           onClick={() => setMobileOpen(true)}
           aria-label="Open Navigation Menu"
         >
@@ -68,7 +67,7 @@ const Header = () => {
                   <span className="font-heading text-xl font-bold">
                     <span className="text-gradient">Vijay</span> Kumar
                   </span>
-                  <button 
+                  <button
                     className="text-foreground hover:text-primary transition-colors p-1"
                     onClick={() => setMobileOpen(false)}
                     aria-label="Close Navigation Menu"
@@ -102,7 +101,7 @@ const Header = () => {
               {/* Bottom CTA in drawer */}
               <div className="space-y-4 pt-6 border-t border-white/5">
                 <Button variant="gradient" size="lg" className="w-full flex justify-center items-center" asChild>
-                  <a 
+                  <a
                     href="https://calendly.com/mondlavijay97/30min"
                     target="_blank"
                     rel="noopener noreferrer"

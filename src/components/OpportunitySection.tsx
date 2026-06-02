@@ -110,7 +110,7 @@ const OpportunitySection = () => {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <section className="relative py-28 overflow-hidden bg-background">
+    <section className="relative pt-16 pb-8 sm:pt-28 sm:pb-28 overflow-hidden bg-background">
       {/* Noise texture overlay */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.035]"
@@ -161,23 +161,23 @@ const OpportunitySection = () => {
         }}
       />
 
-      <div className="container max-w-6xl relative z-10">
+      <div className="container max-w-6xl relative z-10 px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <motion.div
-          className="text-center mb-20"
+          className="text-center mb-10 sm:mb-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-bold sm:text-4xl lg:text-5xl font-heading">
+          <h2 className="text-2xl min-[360px]:text-3xl font-bold sm:text-4xl lg:text-5xl font-heading leading-tight">
             Videos are the{" "}
             <span className="text-gradient">Ultimate Leverage</span>
           </h2>
         </motion.div>
 
         {/* Engine Layout */}
-        <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-0 relative">
+        <div className="flex flex-col lg:flex-row items-center gap-0 relative">
           {/* Connection paths (desktop only) */}
           <div className="hidden lg:block absolute inset-0 z-0">
             <ConnectionPaths hoveredCard={hovered} />
@@ -193,24 +193,24 @@ const OpportunitySection = () => {
           >
             {/* Outer glow ring */}
             <div
-              className="absolute -inset-4 rounded-3xl pointer-events-none"
+              className="absolute -inset-3 sm:-inset-4 rounded-2xl sm:rounded-3xl pointer-events-none"
               style={{
                 background: "radial-gradient(ellipse, hsl(var(--primary) / 0.15) 0%, transparent 70%)",
               }}
             />
             <motion.div
-              className="relative px-10 py-6 rounded-2xl font-heading text-xl font-bold tracking-wider text-primary-foreground"
+              className="relative px-7 py-4 sm:px-10 sm:py-6 rounded-xl sm:rounded-2xl font-heading text-base sm:text-xl font-bold tracking-wider text-primary-foreground select-none"
               style={{
                 background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-bright)))",
                 boxShadow:
-                  "0 0 40px hsl(var(--primary) / 0.3), 0 0 80px hsl(var(--primary) / 0.15), inset 0 1px 0 hsl(0 0% 100% / 0.15)",
+                  "0 0 32px hsl(var(--primary) / 0.3), 0 0 64px hsl(var(--primary) / 0.15), inset 0 1px 0 hsl(0 0% 100% / 0.15)",
               }}
               animate={{
                 scale: [1, 1.04, 1],
                 boxShadow: [
-                  "0 0 40px hsl(var(--primary) / 0.3), 0 0 80px hsl(var(--primary) / 0.15), inset 0 1px 0 hsl(0 0% 100% / 0.15)",
-                  "0 0 55px hsl(var(--primary) / 0.45), 0 0 100px hsl(var(--primary) / 0.25), inset 0 1px 0 hsl(0 0% 100% / 0.2)",
-                  "0 0 40px hsl(var(--primary) / 0.3), 0 0 80px hsl(var(--primary) / 0.15), inset 0 1px 0 hsl(0 0% 100% / 0.15)",
+                  "0 0 32px hsl(var(--primary) / 0.3), 0 0 64px hsl(var(--primary) / 0.15), inset 0 1px 0 hsl(0 0% 100% / 0.15)",
+                  "0 0 45px hsl(var(--primary) / 0.45), 0 0 80px hsl(var(--primary) / 0.25), inset 0 1px 0 hsl(0 0% 100% / 0.2)",
+                  "0 0 32px hsl(var(--primary) / 0.3), 0 0 64px hsl(var(--primary) / 0.15), inset 0 1px 0 hsl(0 0% 100% / 0.15)",
                 ],
               }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -260,7 +260,7 @@ const OpportunitySection = () => {
 
           {/* Mobile connector */}
           <motion.div
-            className="lg:hidden relative w-0.5 h-12"
+            className="lg:hidden relative w-0.5 h-5 my-1"
             style={{ background: "linear-gradient(180deg, hsl(var(--primary) / 0.6), hsl(var(--primary) / 0.1))" }}
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
@@ -269,7 +269,7 @@ const OpportunitySection = () => {
           />
 
           {/* RIGHT — Outcome Cards 2x2 */}
-          <div className="grid grid-cols-2 gap-4 shrink-0 relative z-10">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-[420px] mx-auto lg:max-w-none lg:w-auto shrink-0 relative z-10">
             {outcomes.map(({ icon: Icon, text, id }) => {
               const isHovered = hovered === id;
               const isDimmed = hovered !== null && hovered !== id;
@@ -295,7 +295,7 @@ const OpportunitySection = () => {
                   onMouseLeave={() => setHovered(null)}
                 >
                   <motion.div
-                    className="flex items-center gap-3 rounded-xl px-5 py-4"
+                    className="flex items-center gap-2 sm:gap-3 rounded-xl px-2.5 sm:px-5 h-[68px] sm:h-20"
                     style={{
                       background: "hsl(var(--surface))",
                       borderWidth: 1,
@@ -320,12 +320,14 @@ const OpportunitySection = () => {
                     }}
                   >
                     <div
-                      className="flex items-center justify-center w-9 h-9 rounded-lg shrink-0"
+                      className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg shrink-0"
                       style={{ background: "hsl(var(--primary) / 0.1)" }}
                     >
-                      <Icon size={18} className="text-primary" />
+                      <Icon className="w-4 h-4 sm:w-[18px] sm:h-[18px] text-primary" />
                     </div>
-                    <span className="text-sm font-medium text-foreground whitespace-nowrap">{text}</span>
+                    <span className="text-[11px] min-[360px]:text-xs sm:text-sm font-medium text-foreground whitespace-nowrap overflow-hidden text-ellipsis">
+                      {text}
+                    </span>
                   </motion.div>
                 </motion.div>
               );
@@ -334,9 +336,9 @@ const OpportunitySection = () => {
         </div>
 
         {/* Bottom text */}
-        <div className="text-center mt-20">
+        <div className="text-center mt-10 sm:mt-20">
           <motion.p
-            className="text-lg sm:text-xl font-semibold font-heading"
+            className="text-sm min-[360px]:text-base sm:text-xl font-semibold font-heading"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -359,6 +361,15 @@ const OpportunitySection = () => {
           </motion.p>
         </div>
       </div>
+
+      {/* Premium subtle divider line with purple glow */}
+      <div 
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-[1px]"
+        style={{
+          background: "linear-gradient(90deg, transparent, hsl(var(--primary) / 0.25), transparent)",
+          boxShadow: "0 0 10px hsl(var(--primary) / 0.15)",
+        }}
+      />
     </section>
   );
 };

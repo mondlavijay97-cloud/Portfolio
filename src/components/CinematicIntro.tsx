@@ -14,8 +14,8 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
       setTimeout(() => setScene(2), 800),    // Scene 2: Vijay Kumar Name
       setTimeout(() => setScene(3), 2000),   // Scene 3: Subtitle
       setTimeout(() => setScene(4), 3100),   // Scene 4: PORTFOLIO reveal
-      setTimeout(() => setScene(5), 4100),   // Scene 5: Dissolve / Fade out
-      setTimeout(() => onComplete(), 4800),  // Done: reveal hero
+      setTimeout(() => setScene(5), 5900),   // Scene 5: Dissolve / Fade out
+      setTimeout(() => onComplete(), 6700),  // Done: reveal hero
     ];
 
     return () => timers.forEach(clearTimeout);
@@ -140,7 +140,7 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
               exit={{ opacity: 0, scale: 1.15, filter: "blur(15px)" }}
               transition={{
                 opacity: { duration: 0.8, ease: "easeOut" },
-                scale: { duration: 1.2, ease: "easeOut" },
+                scale: { duration: 0.8, ease: "easeOut" },
                 filter: { duration: 0.8 },
               }}
               className="relative flex items-center justify-center"
